@@ -24,6 +24,12 @@ y https://developers.google.com/youtube/v3/docs?apix=true&hl=es-419#Videos
 
 Puedes consultar el recurso completo en: https://developers.google.com/youtube/v3/getting-started?hl=es-419#quota
 
+### Conocimientos necesarios para comprender qué estamos haciendo
+
+- Qué es la Nube
+- Qué es una API
+- Métodos HTTP (REST)
+
 ## Instrucciones 
 
 1. Crear una cuenta en GCP [COLOCAR CÓMO HACERLO]
