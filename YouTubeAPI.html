@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Buscador y Reproductor de YouTube</title>
+        <style>
+        
+            .video {
+                margin-bottom: 15px; 
+                cursor: pointer; }
+            img { 
+                width: 200px; 
+                margin-right: 10px; 
+            }
+        </style>
+        <script src="config.js"></script>
+    </head>
+    <body>
+        <h1>Buscar videos en YouTube</h1>
+        <input type="text" id="query" placeholder="Escribe algo..." />
+        <button onclick="buscarVideos()">Buscar</button>
+
+        <select id="playlist"> 
+            <option value="PLcrXHyCREVCSqXFiumsJpfS35Rhjrinci"> CURSO WEB </option>
+            <option value="PLcrXHyCREVCSqXFiumsJpfS35Rhjrinci"> CURSO WEB 2 </option>
+        </select>
+
+        <button onclick="cargarPlaylist()">Cargar Playlist</button>
+        <div id="reproductor" style="margin-top:20px;"></div>
+        <div id="resultados"></div>
+
+        <!--CARGAR API IFRAME-->
+        <script>
+            let tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            let firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        
+            let API_KEY = CONFIG.API_KEY;
+
+            let player; 
+
+            function onYouTubeIframeAPIReady() {
+            // Se inicializa vacío, YouTube carga su API de reproducción en segundo plano, y cuando termina, busca y ejecuta esta función
+            // Por lo regular aquí se coloca el reproductor. 
+            }
+
+            function buscarVideos() {
+                let query = document.getElementById('query').value;
+                if (!query) return;
+
+                let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=5&q=${encodeURIComponent(query)}&key=${API_KEY}`;
+                fetch(url)
+                    .then(res => res.json())
+                    .then(data => {
+                    let contenedor = document.getElementById('resultados');
+                    contenedor.innerHTML = "<h2>Resultados:</h2>";
+
+                    data.items.forEach(item => {
+                        let videoId = item.id.videoId;
+                        let title = item.snippet.title;
+                        let thumbnail = item.snippet.thumbnails.medium.url;
+
+                        let div = document.createElement('div');
+                        div.className = 'video';
+                        div.innerHTML = `
+                        <img src="${thumbnail}" alt="${title}">
+                        ${title}
+                        `;
+                        div.onclick = () => reproducirVideo(videoId);
+                        contenedor.appendChild(div);
+                    });
+                });
+            }
+
+            function cargarPlaylist() {
+
+                let playlistId = document.getElementById('playlist').value;
+
+                let url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${playlistId}&key=${API_KEY}`;
+                fetch(url)
+                    .then(res => res.json())
+                    .then(data => {
+                    let contenedor = document.getElementById('resultados');
+                    contenedor.innerHTML = "<h2>Videos en la playlist:</h2>";
+
+                    data.items.forEach(item => {
+                        let videoId = item.snippet.resourceId.videoId;
+                        let title = item.snippet.title;
+                        let thumbnail = item.snippet.thumbnails.medium.url;
+
+                        let div = document.createElement('div');
+                        div.className = 'video';
+                        div.innerHTML = `
+                        <img src="${thumbnail}" alt="${title}">
+                        ${title}
+                        `;
+                        div.onclick = () => reproducirVideo(videoId);
+                        contenedor.appendChild(div);
+                    });
+                });
+            }
+
+
+            function reproducirVideo(videoId) {
+                let contenedor = document.getElementById('reproductor');
+
+                if (player) 
+                    player.loadVideoById(videoId);
+                else {
+                    contenedor.innerHTML = '<div id="player"></div>';
+                    player = new YT.Player('player', {
+                        height: '390',
+                        width: '640',
+                        videoId: videoId,
+                        playerVars: { playsinline: 1 }
+                    });
+                }
+            }
+    </script>
+    </body>
+</html>

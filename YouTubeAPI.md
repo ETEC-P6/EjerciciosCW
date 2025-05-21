@@ -35,10 +35,8 @@ Puedes consultar el recurso completo en: https://developers.google.com/youtube/v
 1. Crear una cuenta en GCP [COLOCAR CÓMO HACERLO]
 2. Crear un proyecto en GCP [COLOCAR CÓMO HACERLO]
    IMPORTANTE: Los nombres de los proyectos deben ser únicos. Recomiendo que sea super especifico para que no les pongan cadenar raras. Ejemplo: api-youtube-curso-web-[usuario-github]
-3. Crear un cliente
-  - Google Auth Platform / Clientes / Crear cliente
-  IMPORTANTE: El nombre también debe ser muy descriptivo.
-4. Copiar el secreto - lo usaremos más tarde
-5. Habilitar las APIs
+3. Habilitar las APIs
   - APIs y Servicios / Hbailitar APIs y Servicios
-  - Buscar YouTube Data API v3 y [COLOCAR LA OTRA JAJAJAJ]
+  - Buscar YouTube Data API v3 y habilitar
+
+MÁS COSAS QUE INTERESAN https://developers.google.com/youtube/v3/docs/search/list?hl=es-419
