@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nombre": "Roman",
+    "datos": {
+      "edad": 18,
+      "ciudad": "CDMX"
+    }
+  },
+  {
+    "id": 2,
+    "nombre": "Arturo",
+    "datos": {
+      "edad": 22,
+      "ciudad": "GDL"
+    }
+  },
+  {
+    "id": 3,
+    "nombre": "Urrutia",
+    "datos": {
+      "edad": 30,
+      "ciudad": "MTY"
+    }
+  }
+]

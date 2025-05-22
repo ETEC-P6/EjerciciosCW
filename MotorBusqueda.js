@@ -143,16 +143,15 @@ class BaseDeDatos {
     buscarPorNombre(nombre){
         let actual = this.cabeza;
         let resultados = [];
-        let patron = prompt("Ingrese busqueda:");
+        let patron = nombre;
         patron = "\\" + patron + "\\";
         while (actual)  {
-            if (actual.nombre.match(patron)) {
+            if (actual.nombre.includes(nombre)) {
                 resultados.push(actual);
             }
             actual = actual.siguiente;
         }
         return resultados;
-
     }
 
     // Cargar datos desde un archivo JSON
@@ -182,7 +181,7 @@ class BaseDeDatos {
 
 // 📌 Ejemplo de uso:
 const bd = new BaseDeDatos();
-bd.agregarRegistro(1, "Isaac", { edad: 18, ciudad: "CDMX" }, "https://www.youtube.com/embed/9psdED3TY3A?si=G7-m9nYWErBJJiWl");
+bd.agregarRegistro(1, "Roman", { edad: 18, ciudad: "CDMX" }, "https://www.youtube.com/embed/9psdED3TY3A?si=G7-m9nYWErBJJiWl");
 bd.agregarRegistro(2, "Arturo", { edad: 22, ciudad: "GDL" }, null);
 bd.agregarRegistro(3, "Urrutia", { edad: 30, ciudad: "MTY" }, null);
 
@@ -192,19 +191,12 @@ console.log(bd.buscarRegistro(2));
 bd.guardarEnArchivo();;
 console.log(bd.imprimirBase());
 
-//Corrección. Al compilar es : node BaseDeDatos.js "texto para buscar"
-const pattern = "\\" + process.argv[2] + "\\";
-console.log("Patrón procesado:", pattern);
+let arreglotemporal = bd.buscarPorNombre("Roman");
 
-
-
-// ESTA ÚLTIMA PARTE NO ESTÁ BIEN
-/*let pattern = prompt("Ingrese busqueda:");
-pattern = "\\"  + pattern + "\\";
-
+for (let i = 0; i < arreglotemporal.length; i++) {
+    console.log(arreglotemporal[i]);
+}
 bd.cargarDesdeArchivo(); // Cargar desde JSON
 console.log(bd.imprimirBase());
 
-generarPaginaHTML(bd);*/
-
-//ADEMÁS, cargar la página y luego imprimirla sobra porque ya se hace la impresion y verifiqué que sí cargara.
+generarPaginaHTML(bd);
