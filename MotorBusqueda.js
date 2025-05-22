@@ -142,9 +142,7 @@ class BaseDeDatos {
     //buscar por nombre
     buscarPorNombre(nombre){
         let actual = this.cabeza;
-        let resultados = [];
-        let patron = nombre;
-        patron = "\\" + patron + "\\";
+        let resultados = []
         while (actual)  {
             if (actual.nombre.includes(nombre)) {
                 resultados.push(actual);
