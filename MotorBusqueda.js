@@ -192,10 +192,19 @@ console.log(bd.buscarRegistro(2));
 bd.guardarEnArchivo();;
 console.log(bd.imprimirBase());
 
-let pattern = prompt("Ingrese busqueda:");
+//Corrección. Al compilar es : node BaseDeDatos.js "texto para buscar"
+const pattern = "\\" + process.argv[2] + "\\";
+console.log("Patrón procesado:", pattern);
+
+
+
+// ESTA ÚLTIMA PARTE NO ESTÁ BIEN
+/*let pattern = prompt("Ingrese busqueda:");
 pattern = "\\"  + pattern + "\\";
 
 bd.cargarDesdeArchivo(); // Cargar desde JSON
 console.log(bd.imprimirBase());
 
-generarPaginaHTML(bd);
+generarPaginaHTML(bd);*/
+
+//ADEMÁS, cargar la página y luego imprimirla sobra porque ya se hace la impresion y verifiqué que sí cargara.
