@@ -4,6 +4,7 @@
         Pagina de CW full frontEnd
     </title>
     <meta charset='UTF-8'>
+    <script src="BaseDeDatos.js"></script>
 </head>
 <body>
     <script>
@@ -14,25 +15,28 @@
             artista;
             album;
             link;
-            constructor(id, nombre, artista, album, link)
+            genero; 
+            constructor(id, nombre, artista, album, link, genero)
             {
                 this.id = id;
                 this.nombre = nombre;
                 this.artista = artista;
                 this.album = album;
                 this.link = link;
+                this.genero = genero;
             }
         }
 
-        var baseDatos = 
-        [
-            new cancion(1, 'Wake me up', 'Avicii', 'True', 'https://www.youtube-nocookie.com/embed/6Cp6mPV0mCg?si=Vs8ScFVDzfi_IEW2'),
-            new cancion(2, 'Hey brother', 'Avicii', 'True', 'https://www.youtube-nocookie.com/embed/6Cp6mPV0mCg?si=Vs8ScFVDzfi_IEW2'),
-            new cancion(3, 'Alone', 'Marshmello', 'Marshmello', 'https://www.youtube-nocookie.com/embed/2vY1g0c4j6A?si=8Xk3x7q5a9e1bJrE')
-        ]
+        function JSONToArray(json) 
+        {
+            const bd = new Array(); 
+            for (let i = 0; i < json.length; i++) 
+                bd.push(new cancion(json[i].id, json[i].nombre, json[i].artista, json[i].album, json[i].link, json[i].genero));
+            return bd; 
+        }
 
-        baseDatos.push(new cancion(4, 'Animals', 'Martin Garrix', 'Animals', 'https://www.youtube-nocookie.com/embed/NYj7c2g0v4E?si=8Xk3x7q5a9e1bJrE'))
-        baseDatos.push(new cancion(5, 'Titanium', 'David Guetta', 'Nothing but the Beat', 'https://www.youtube-nocookie.com/embed/Jc9j0g0v4E?si=8Xk3x7q5a9e1bJrE'))
+        var baseDatos = JSONToArray(baseDatosJSON);
+
     </script>
     <title>
         MusicETE
