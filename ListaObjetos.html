@@ -3,7 +3,7 @@
     <title>
         Pagina de CW full frontEnd
     </title>
-    <meta charset="UTF-8">
+    <meta charset='UTF-8'>
 </head>
 <body>
     <script>
@@ -26,13 +26,13 @@
 
         var baseDatos = 
         [
-            new cancion(1, "Wake me up", "Avicii", "True", "https://www.youtube-nocookie.com/embed/6Cp6mPV0mCg?si=Vs8ScFVDzfi_IEW2"),
-            new cancion(2, "Hey brother", "Avicii", "True", "https://www.youtube-nocookie.com/embed/6Cp6mPV0mCg?si=Vs8ScFVDzfi_IEW2"),
-            new cancion(3, "Alone", "Marshmello", "Marshmello", "https://www.youtube-nocookie.com/embed/2vY1g0c4j6A?si=8Xk3x7q5a9e1bJrE")
+            new cancion(1, 'Wake me up', 'Avicii', 'True', 'https://www.youtube-nocookie.com/embed/6Cp6mPV0mCg?si=Vs8ScFVDzfi_IEW2'),
+            new cancion(2, 'Hey brother', 'Avicii', 'True', 'https://www.youtube-nocookie.com/embed/6Cp6mPV0mCg?si=Vs8ScFVDzfi_IEW2'),
+            new cancion(3, 'Alone', 'Marshmello', 'Marshmello', 'https://www.youtube-nocookie.com/embed/2vY1g0c4j6A?si=8Xk3x7q5a9e1bJrE')
         ]
 
-        baseDatos.push(new cancion(4, "Animals", "Martin Garrix", "Animals", "https://www.youtube-nocookie.com/embed/NYj7c2g0v4E?si=8Xk3x7q5a9e1bJrE"))
-        baseDatos.push(new cancion(5, "Titanium", "David Guetta", "Nothing but the Beat", "https://www.youtube-nocookie.com/embed/Jc9j0g0v4E?si=8Xk3x7q5a9e1bJrE"))
+        baseDatos.push(new cancion(4, 'Animals', 'Martin Garrix', 'Animals', 'https://www.youtube-nocookie.com/embed/NYj7c2g0v4E?si=8Xk3x7q5a9e1bJrE'))
+        baseDatos.push(new cancion(5, 'Titanium', 'David Guetta', 'Nothing but the Beat', 'https://www.youtube-nocookie.com/embed/Jc9j0g0v4E?si=8Xk3x7q5a9e1bJrE'))
     </script>
     <title>
         MusicETE
@@ -40,10 +40,10 @@
     <h1>
         Buscador
     </h1>
-    <input type="text" id="buscador" placeholder="Buscar Algo"/>
-    <button id="botBuscar" onclick="busqueda()">Buscar</button>
+    <input type='text' id='buscador' placeholder='Buscar Algo'/>
+    <button id='botBuscar' onclick='busqueda()'>Buscar</button>
     <br>
-    <div id="resultados"></div>
+    <div id='resultados'></div>
 
     <script>
         function busqueda()
@@ -65,12 +65,22 @@
                     resultados.push(baseDatos[i]);
                 }
             }
-            document.getElementById("resultados").textContent = "";
+            document.getElementById("resultados").innerHTML= "";
             for (var i = 0; i < resultados.length; i++)
             {
-                
-                document.getElementById("resultados").innerHTML += "<p>" + resultados[i].nombre + " - " + resultados[i].artista + "</p>";
+                document.getElementById("resultados").innerHTML += "<p>" + resultados[i].nombre + "-" + resultados[i].artista;
+                document.getElementById("resultados").innerHTML += "<button onclick='reproducir(" + resultados[i].id + ")'>Reproducir</button>" + "<p/>";
             }
+        }
+        function reproducir(id)
+        {
+            for (var i = 0; i < baseDatos.length; i++)
+            {
+                if (baseDatos[i].id == id)
+                {
+                    document.getElementById("resultados").innerHTML = "<iframe width='560' height='315' src='" + baseDatos[i].link + "' frameborder='0' allowfullscreen></iframe>";
+                }
+            }    
         }
     </script>
     
