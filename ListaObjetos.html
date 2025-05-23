@@ -24,12 +24,15 @@
             }
         }
 
-        var baseDatos = [
-            new cancion(1, "Shape of you", "Ed Sheeran", "Divide", "https://www.youtube.com/watch?v=JGwWNGJdvx8"),
-            new cancion(2, "Hey brother", "Avicii", "True", "https://www.youtube.com/watch?v=6Cp6mPV0mCg"),
-            new cancion(3, "Animals", "Martin Garrix", "Animals", "https://www.youtube.com/watch?v=gCYcHz2k5x0"),
+        var baseDatos = 
+        [
+            new cancion(1, "Wake me up", "Avicii", "True", "https://www.youtube-nocookie.com/embed/6Cp6mPV0mCg?si=Vs8ScFVDzfi_IEW2"),
+            new cancion(2, "Hey brother", "Avicii", "True", "https://www.youtube-nocookie.com/embed/6Cp6mPV0mCg?si=Vs8ScFVDzfi_IEW2"),
+            new cancion(3, "Alone", "Marshmello", "Marshmello", "https://www.youtube-nocookie.com/embed/2vY1g0c4j6A?si=8Xk3x7q5a9e1bJrE")
         ]
-        baseDatos.push(new cancion(4, "Alone", "alan Walker", "Alone", "https://www.youtube.com/watch?v=2M8Y4j0g7xA")); 
+
+        baseDatos.push(new cancion(4, "Animals", "Martin Garrix", "Animals", "https://www.youtube-nocookie.com/embed/NYj7c2g0v4E?si=8Xk3x7q5a9e1bJrE"))
+        baseDatos.push(new cancion(5, "Titanium", "David Guetta", "Nothing but the Beat", "https://www.youtube-nocookie.com/embed/Jc9j0g0v4E?si=8Xk3x7q5a9e1bJrE"))
     </script>
     <title>
         MusicETE
@@ -62,8 +65,10 @@
                     resultados.push(baseDatos[i]);
                 }
             }
+            document.getElementById("resultados").textContent = "";
             for (var i = 0; i < resultados.length; i++)
             {
+                
                 document.getElementById("resultados").innerHTML += "<p>" + resultados[i].nombre + " - " + resultados[i].artista + "</p>";
             }
         }
