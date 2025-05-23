@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head>
+    <title>
+        Pagina de CW full frontEnd
+    </title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+        class cancion
+        {
+            id;
+            nombre;
+            artista;
+            album;
+            link;
+            constructor(id, nombre, artista, album, link)
+            {
+                this.id = id;
+                this.nombre = nombre;
+                this.artista = artista;
+                this.album = album;
+                this.link = link;
+            }
+        }
+
+        var baseDatos = [
+            new cancion(1, "Shape of you", "Ed Sheeran", "Divide", "https://www.youtube.com/watch?v=JGwWNGJdvx8"),
+            new cancion(2, "Hey brother", "Avicii", "True", "https://www.youtube.com/watch?v=6Cp6mPV0mCg"),
+            new cancion(3, "Animals", "Martin Garrix", "Animals", "https://www.youtube.com/watch?v=gCYcHz2k5x0"),
+        ]
+        baseDatos.push(new cancion(4, "Alone", "alan Walker", "Alone", "https://www.youtube.com/watch?v=2M8Y4j0g7xA")); 
+    </script>
+    <title>
+        MusicETE
+    </title>
+    <h1>
+        Buscador
+    </h1>
+    <input type="text" id="buscador" placeholder="Buscar Algo"/>
+    <button id="botBuscar" onclick="busqueda()">Buscar</button>
+    <br>
+    <div id="resultados"></div>
+
+    <script>
+        function busqueda()
+        {
+            var palabra = document.getElementById("buscador").value;
+            var resultados = [];
+            for (var i = 0; i < baseDatos.length; i++)
+            {
+                if (baseDatos[i].nombre.toLowerCase().includes(palabra.toLoweCase))
+                {
+                    resultados.push(baseDatos[i]);
+                }
+                else if (baseDatos[i].artista.toLowerCase().includes(palabra.toLowerCase()))
+                {
+                    resultados.push(baseDatos[i]);
+                }
+                else if (baseDatos[i].album.toLowerCase().includes(palabra.toLowerCase()))
+                {
+                    resultados.push(baseDatos[i]);
+                }
+            }
+            for (var i = 0; i < resultados.length; i++)
+            {
+                document.getElementById("resultados").innerHTML += "<p>" + resultados[i].nombre + " - " + resultados[i].artista + "</p>";
+            }
+        }
+    </script>
+    
+</body>
