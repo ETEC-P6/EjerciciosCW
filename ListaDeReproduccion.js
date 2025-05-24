@@ -2,9 +2,14 @@
 
 export class ListaDeReproduccion{
 
-    construct(){
-        this.lista = []
+    constructor(arreglo){
+        this.lista = null;
+        if(!Array.isArray(array))
+            this.lista = [];
+        else
+            this.lista = structuredClone(arreglo); 
     }
+    
 
     pop(indice){
         let eliminado = this.lista[i];
