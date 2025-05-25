@@ -4,7 +4,7 @@ const baseDatosJSON = [
         nombre: "Wake me up",
         artista: "Avicii",
         album: "True",
-        link: "https://www.youtube-nocookie.com/embed/6Cp6mPV0mCg?si=Vs8ScFVDzfi_IEW2", 
+        link: "https://www.youtube-nocookie.com/embed/SsYXnH9lzCY?", 
         genero: "A",
     },
     {
@@ -12,7 +12,7 @@ const baseDatosJSON = [
         nombre: "Hey brother",
         artista: "Avicii",
         album: "True",
-        link: "https://www.youtube-nocookie.com/embed/6Cp6mPV0mCg?si=Vs8ScFVDzfi_IEW2", 
+        link: "https://www.youtube-nocookie.com/embed/DlGhyuJcB3g", 
         genero: "A",
     },
     {
@@ -20,7 +20,7 @@ const baseDatosJSON = [
         nombre: "Alone",
         artista: "Marshmello",
         album: "Marshmello",
-        link: "https://www.youtube-nocookie.com/embed/2vY1g0c4j6A?si=8Xk3x7q5a9e1bJrE",
+        link: "https://www.youtube-nocookie.com/embed/_G_ArTkLF-U",
         genero: "B",
     },
     {
@@ -28,7 +28,7 @@ const baseDatosJSON = [
         nombre: "Animals",
         artista: "Martin Garrix",
         album: "Animals",
-        link: "https://www.youtube-nocookie.com/embed/NYj7c2g0v4E?si=8Xk3x7q5a9e1bJrE",
+        link: "https://www.youtube-nocookie.com/embed/2kpAzC2Mja8",
         genero: "B",
     },
     {
@@ -36,7 +36,7 @@ const baseDatosJSON = [
         nombre: "Titanium",
         artista: "David Guetta",
         album: "Nothing but the Beat",
-        link: "https://www.youtube-nocookie.com/embed/Jc9j0g0v4E?si=8Xk3x7q5a9e1bJrE",
+        link: "https://www.youtube-nocookie.com/embed/KxnpFKZowcs",
         genero: "C",
     }
 ];
