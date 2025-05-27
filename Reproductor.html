@@ -81,13 +81,26 @@
                 document.getElementById("resultados").innerHTML += "<button onclick='agregarALista(" + resultados[i].id + ")'>Agregar</button>" + "</p>";
             }
         }
+        let player;
         function reproducir(id)
         {
             for (var i = 0; i < baseDatos.length; i++)
             {
                 if (baseDatos[i].id == id)
                 {
-                    document.getElementById("resultados").innerHTML = "<iframe width='560' height='315' src='" + baseDatos[i].link + "' frameborder='0' allowfullscreen></iframe>";
+                    let contenedor = document.getElementById('buscador');
+
+                if (player) 
+                    player.loadVideoById(id);
+                else {
+                    contenedor.innerHTML = '<div id="player"></div>';
+                    player = new YT.Player('player', {
+                        height: '390',
+                        width: '640',
+                        videoId: videoId,
+                        playerVars: { playsinline: 1 }
+                    });
+                }
                 }
             }    
         }
