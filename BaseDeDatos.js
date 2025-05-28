@@ -4,7 +4,7 @@ const baseDatosJSON = [
         nombre: "Wake me up",
         artista: "Avicii",
         album: "True",
-        link: "69Fb6XozEx8", 
+        link: "M7lc1UVf-VE", 
         genero: "A",
     },
     {
@@ -12,7 +12,7 @@ const baseDatosJSON = [
         nombre: "Hey brother",
         artista: "Avicii",
         album: "True",
-        link: "69Fb6XozEx8", 
+        link: "M7lc1UVf-VE", 
         genero: "A",
     },
     {
@@ -20,7 +20,7 @@ const baseDatosJSON = [
         nombre: "Alone",
         artista: "Marshmello",
         album: "Marshmello",
-        link: "69Fb6XozEx8",
+        link: "M7lc1UVf-VE",
         genero: "B",
     },
     {
@@ -28,7 +28,7 @@ const baseDatosJSON = [
         nombre: "Animals",
         artista: "Martin Garrix",
         album: "Animals",
-        link: "69Fb6XozEx8",
+        link: "M7lc1UVf-VE",
         genero: "B",
     },
     {
@@ -36,7 +36,7 @@ const baseDatosJSON = [
         nombre: "Titanium",
         artista: "David Guetta",
         album: "Nothing but the Beat",
-        link: "69Fb6XozEx8",
+        link: "M7lc1UVf-VE",
         genero: "C",
     }
 ];

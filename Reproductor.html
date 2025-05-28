@@ -6,6 +6,7 @@
     <meta charset='UTF-8'>
     <link rel="stylesheet" type="text/css" href="./estilosRep.css">
     <script src="./BaseDeDatos.js"></script>  
+    <script src="https://youtube.com/iframe_api"></script>
 </head>
 <body>
     <script>
@@ -52,6 +53,7 @@
         <button id='botBuscar' onclick='busqueda()'>Buscar</button>
         <br>
         <div id='resultados'></div>
+        <div id='playerContainer'></div>
     </div>
 
     <script>
@@ -89,17 +91,18 @@
             {
                 if (baseDatos[i].id == id)
                 {
-                    let contenedor = document.getElementById('buscador');
+                    let contenedor = document.getElementById('playerContainer');
 
-                if (player) 
-                    player.loadVideoById(id);
-                else {
-                    contenedor.innerHTML = '<div id="player"></div>';
-                    player = new YT.Player('player', {
-                        height: '390',
-                        width: '640',
-                        videoId: videoId,
-                        playerVars: { playsinline: 1 }
+                    if (player) 
+                        player.loadVideoById(id);
+                    else 
+                    {
+                        contenedor.innerHTML = '<div id="player"></div>';
+                        player = new YT.Player('player', {
+                            height: '390',
+                            width: '640',
+                            videoId: baseDatos[i].link,
+                            playerVars: { playsinline: 1 }
                     });
                 }
                 }
@@ -108,7 +111,7 @@
     </script>
 
     <div class="section">
-        <h2></h2>Lista de Reproducción</h2>
+        <h2>Lista de Reproducción</h2>
         <button id='botMostrarLista' onclick='mostrarLista()'>Mostrar Lista</button>
         <button id='botMezclarLista' onclick='mezclarLista()'>Aleatorio</button>
         <br>
@@ -211,4 +214,3 @@
 
     </script>
 </body>
-</html>
