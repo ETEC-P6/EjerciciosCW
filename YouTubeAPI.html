@@ -3,29 +3,22 @@
     <head>
         <meta charset="UTF-8">
         <title>Buscador y Reproductor de YouTube</title>
-        <style>
-        
-            .video {
-                margin-bottom: 15px; 
-                cursor: pointer; }
-            img { 
-                width: 200px; 
-                margin-right: 10px; 
-            }
-        </style>
-        <script src="config.js"></script>
+        <link rel="stylesheet" type="text/css" href="./estilosYT.css">
+        <script src="./confij.js"></script>
     </head>
     <body>
         <h1>Buscar videos en YouTube</h1>
-        <input type="text" id="query" placeholder="Escribe algo..." />
-        <button onclick="buscarVideos()">Buscar</button>
 
-        <select id="playlist"> 
-            <option value="PLcrXHyCREVCSqXFiumsJpfS35Rhjrinci"> CURSO WEB </option>
-            <option value="PLcrXHyCREVCSqXFiumsJpfS35Rhjrinci"> CURSO WEB 2 </option>
-        </select>
+        <div class="playlist-control">
+            <input type="text" id="query" placeholder="Escribe algo..." />
+            <button onclick="buscarVideos()">Buscar</button>
+            <select id="playlist"> 
+                <option value="PLcrXHyCREVCSqXFiumsJpfS35Rhjrinci">CURSO WEB</option>
+                <option value="PLcrXHyCREVCSqXFiumsJpfS35Rhjrinci">CURSO WEB 2</option>
+            </select>
+            <button onclick="cargarPlaylist()">Cargar Playlist</button>
+        </div>
 
-        <button onclick="cargarPlaylist()">Cargar Playlist</button>
         <div id="reproductor" style="margin-top:20px;"></div>
         <div id="resultados"></div>
 
