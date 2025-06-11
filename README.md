@@ -58,7 +58,7 @@ Para usar la YouTube Data API v3:
 4. Crea un archivo confij.js dentro de /Dynamics/JS donde tendrás que poner :
    ```js
      const CONFIG = {
-        API_KEY: 'AIzaSyA1_jvHsAO0BTQJAEluiK_i-1ZDvXm3HAw', // Reemplaza con tu clave de API de YouTube
+        API_KEY: 'TU_KEY', // Reemplaza con tu clave de API de YouTube
       };
    ```
 
