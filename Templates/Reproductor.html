@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+    <title>
+        Pagina de CW full frontEnd
+    </title>
+    <meta charset='UTF-8'>
+    <link rel="stylesheet" type="text/css" href="./estilosRep.css">
+    <script src="./BaseDeDatos.js"></script>  
+    <script src="https://youtube.com/iframe_api"></script>
+</head>
+<body>
+    
+    <h1>
+        MusicETE
+    </h1>
+    
+    <div class="section">
+        <h2>
+            Buscador de Canciones
+        </h2>
+        <input type='text' id='buscador' placeholder='Buscar Algo'/>
+        <button id='botBuscar' onclick='busqueda()'>Buscar</button>
+        <br>
+        <div id='resultados'></div>
+        <div id='playerContainer'></div>
+    </div>
+
+    
+
+    <div class="section">
+        <h2>Lista de Reproducción</h2>
+        <button id='botMostrarLista' onclick='mostrarLista()'>Mostrar Lista</button>
+        <button id='botMezclarLista' onclick='mezclarLista()'>Aleatorio</button>
+        <br>
+        <div id='listaContainer'></div>
+    </div>
+
+</body>
