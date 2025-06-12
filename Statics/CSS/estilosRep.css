@@ -166,6 +166,7 @@ button:hover {
 .contIconInfoCancion{
     width: 80%;
     justify-content: left;
+    align-items: center;
 }
 .iconoCancion{
     padding-left: 2%;

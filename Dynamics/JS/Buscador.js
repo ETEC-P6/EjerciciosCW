@@ -17,3 +17,11 @@ buscador.addEventListener("input", (event)=>{
     }
     
 });
+
+
+// const btnBuscar = document.getElementById("btnBuscar");
+/*
+btnBuscar.addEventListener("click", ()=>{
+    busqueda();
+});
+*/
