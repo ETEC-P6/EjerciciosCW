@@ -6,7 +6,10 @@ class cancion
     album;
     link;
     genero; 
-    constructor(id, nombre, artista, album, link, genero)
+    id_artista;
+    id_genero;
+    id_album;
+    constructor(id, nombre, artista, album, link, genero, id_artista, id_genero, id_album)
     {
         this.id = id;
         this.nombre = nombre;
@@ -14,64 +17,93 @@ class cancion
         this.album = album;
         this.link = link;
         this.genero = genero;
+        this.id_artista = id_artista;
+        this.id_genero = id_genero;
+        this.id_album = id_album;
     }
+
 }
 
-function JSONToArray(json) 
+function JSONToArray(json)
 {
+    console.log(json);
     const bd = new Array(); 
-    for (let i = 0; i < json.length; i++) 
-        bd.push(new cancion(json[i].id, json[i].nombre, json[i].artista, json[i].album, json[i].link, json[i].genero));
+
+    //Para canciones
+    for (let i = 0; i < json.canciones.length; i++)
+        bd.push(new cancion(json.canciones[i].id, json.canciones[i].nombre, json.canciones[i].artista, json.canciones[i].album, json.canciones[i].link, json.canciones[i].genero, json.canciones[i].id_artista, json.canciones[i].id_genero, json.canciones[i].id_album));
+    // console.log(bd);
     return bd; 
 }
 
-var baseDatos = JSONToArray(baseDatosJSON);
+let bdCanciones = JSONToArray(baseDatosJSON);
 const buscador = document.getElementById("buscador");
 const divResultados = document.getElementById("resultados");
 const btnBuscar = document.getElementById("btnBuscar");
 const divSecPlayer = document.getElementById("divSecPlayer");
 
+function generarSeccion(resultados){
+    console.log(resultados);
+    divResultados.innerHTML= "";
+    for (var i = 0; i < resultados.length; i++)
+    {
+        let nuevoP = document.createElement("p");
+        let nuevoInnerHTML = "";
+        nuevoP.setAttribute("data-set", resultados[i].id);
+        nuevoP.classList.add("cancionItem");
+        nuevoInnerHTML += `<span class="tituloCancion">${resultados[i].nombre} - ${resultados[i].artista}</span>
+                            <div class="infoCancion">
+                                <span data-set="${resultados[i].id_album}">Álbum: ${resultados[i].album}</span>
+                                <span data-set="${resultados[i].id_genero}">Género: ${resultados[i].genero}</span>
+                            </div>
+                            <div class="botonesCancion">
+                                <button onclick="reproducir(${resultados[i].id})">Reproducir</button>
+                                <button onclick="agregarALista(${resultados[i].id})">Agregar</button>
+                            </div>`;
+        nuevoP.innerHTML = nuevoInnerHTML;
+        divResultados.appendChild(nuevoP);
+    }
+    console.log(nuevoInnerHTML);
+    // divResultados.innerHTML = nuevoInnerHTML;
+}
 function busqueda()
 {
     let palabra = buscador.value;
     let resultados = [];
-    for (var i = 0; i < baseDatos.length; i++)
+    let canciones = bdCanciones;
+    for (var i = 0; i < canciones.length; i++)
     {
-        if (baseDatos[i].nombre.toLowerCase().includes(palabra.toLowerCase()))
+        if (canciones[i].nombre.toLowerCase().includes(palabra.toLowerCase()))
         {
-            resultados.push(baseDatos[i]);
+            resultados.push(canciones[i]);
         }
-        else if (baseDatos[i].artista.toLowerCase().includes(palabra.toLowerCase()))
+        else if (canciones[i].artista.toLowerCase().includes(palabra.toLowerCase()))
         {
-            resultados.push(baseDatos[i]);
+            resultados.push(canciones[i]);
         }
-        else if (baseDatos[i].album.toLowerCase().includes(palabra.toLowerCase()))
+        else if (canciones[i].album.toLowerCase().includes(palabra.toLowerCase()))
         {
-            resultados.push(baseDatos[i]);
+            resultados.push(canciones[i]);
         }
     }
-    console.log(resultados, divResultados);
-
-    divResultados.innerHTML= "";
-    let nuevoInnerHTML="";
-    for (var i = 0; i < resultados.length; i++)
+    // console.log(resultados, divResultados);
+    if (resultados.length > 0)
     {
-        nuevoInnerHTML += `<p data-set="${resultados[i].id}"> ${resultados[i].nombre} - ${resultados[i].artista}
-                                <button onclick='reproducir(${resultados[i].id})'>Reproducir</button>
-                                <button onclick='agregarALista(${resultados[i].id})'>Agregar</button>
-                            </p>`;
+        generarSeccion(resultados);
     }
-    divResultados.innerHTML = nuevoInnerHTML;
-    // divSecPlayer.style.display = ""
+    else
+    {
+        divResultados.innerHTML = "<p>No se encontraron resultados</p>";
+    }
 }
 let player;
 function reproducir(id)
 {
     divSecPlayer.style.display = "block";
     
-    for (var i = 0; i < baseDatos.length; i++)
+    for (var i = 0; i < bdCanciones.length; i++)
     {
-        if (baseDatos[i].id == id)
+        if (bdCanciones[i].id == id)
         {
             let contenedor = document.getElementById('playerContainer');
 
@@ -83,7 +115,7 @@ function reproducir(id)
                 player = new YT.Player('player', {
                     height: '390',
                     width: '640',
-                    videoId: baseDatos[i].link,
+                    videoId: bdCanciones[i].link,
                     playerVars: { playsinline: 1, autoplay: 1 }
                 });
         }
@@ -97,19 +129,19 @@ function cancionAnterior(i)
     let nuevoID = i - 1;
     if (nuevoID < 0)
     {
-        nuevoID = baseDatos.length - 1;    
+        nuevoID = bdCanciones.length - 1;    
     }
-    reproducir(baseDatos[nuevoID].id);
+    reproducir(bdCanciones[nuevoID].id);
 }
 
 function cancionSiguiente(i)
 {
     let nuevoID = i + 1;
-    if (nuevoID >= baseDatos.length)
+    if (nuevoID >= bdCanciones.length)
     {
         nuevoID = 0;    
     }
-    reproducir(baseDatos[nuevoID].id);
+    reproducir(bdCanciones[nuevoID].id);
 }
 
 function playPausa()
@@ -174,7 +206,7 @@ class ListaDeReproduccion{
         arreglo[b] = c;
     }
 
-    let listaReproduccion = new ListaDeReproduccion(baseDatos);
+    let listaReproduccion = new ListaDeReproduccion(bdCanciones);
 
     function agregarALista(id) 
     {
@@ -184,11 +216,11 @@ class ListaDeReproduccion{
                 return;
         }
         
-        for (var j = 0; j < baseDatos.length; j++) 
+        for (var j = 0; j < bdCanciones.length; j++) 
         {
-            if (baseDatos[j].id === id) 
+            if (bdCanciones[j].id === id) 
             {
-                listaReproduccion.push(baseDatos[j]);
+                listaReproduccion.push(bdCanciones[j]);
                 mostrarLista();
                 return;
             }
@@ -220,9 +252,12 @@ class ListaDeReproduccion{
 
 
 buscador.addEventListener("keydown", (event)=>{
-    if(event.key === "Enter"){
+    if(buscador.value === "" || event.key === "Backspace"){
+        divResultados.innerHTML= "";
+    } else {
         busqueda();
     }
+    
 });
 btnBuscar.addEventListener("click", ()=>{
     busqueda();
