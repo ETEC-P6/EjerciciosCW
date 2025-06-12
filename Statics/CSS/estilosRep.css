@@ -58,6 +58,10 @@ button {
     transition: background 0.3s ease;
 }
 
+#botonPausa {
+    border-radius: 100% 100% 100% 100%;
+}
+
 button:hover {
     background: #e6b800;
 }
