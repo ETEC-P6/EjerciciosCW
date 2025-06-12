@@ -1,0 +1,111 @@
+/* Reinicia márgenes y paddings para todos los elementos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.playlist-control {
+  display: flex;
+  align-items: center;  /* Centra verticalmente los elementos */
+  gap: 10px;            /* Espacio entre el selector y el botón */
+  margin-top: 10px;     /* Espacio superior, si lo deseas */
+}
+/* Estilo para el body */
+body {
+  background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  color: #333;
+}
+
+/* Encabezado */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+/* Estilo para el input de búsqueda */
+input[type="text"] {
+  width: 60%;
+  padding: 10px;
+  border: 1px solid #3e9d3e;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Botones */
+button {
+  padding: 10px 20px;
+  margin: 10px 5px;
+  border: none;
+  background-color: #274526;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#contenedor-flex {
+  display: flex;
+  gap: 20px;           /* Espacio entre el reproductor y la playlist */
+  margin-top: 20px;
+  flex-wrap: wrap;     /* Permite que se ajusten en pantallas pequeñas */
+}
+
+button:hover {
+  background-color: #3d6e39;
+}
+
+/* Lista desplegable (select) */
+select {
+  padding: 10px;
+  margin: 10px 5px;
+  border: 1px solid #3e9d3e;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Contenedor para el reproductor de video */
+#reproductor {
+  margin-top: 20px;
+  text-align: center;
+  flex: 1 1 640px;
+}
+
+/* Contenedor para los resultados */
+#resultados {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Tarjeta de video */
+.video {
+  background-color: #fff;
+  width: 220px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.video:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Imágenes dentro de cada video */
+.video img { 
+  width: 100%;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
