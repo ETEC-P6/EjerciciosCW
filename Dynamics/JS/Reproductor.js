@@ -26,12 +26,14 @@ function JSONToArray(json)
 }
 
 var baseDatos = JSONToArray(baseDatosJSON);
-
+const buscador = document.getElementById("buscador");
+const divResultados = document.getElementById("resultados");
+const btnBuscar = document.getElementById("btnBuscar");
 
 function busqueda()
 {
-    var palabra = document.getElementById("buscador").value;
-    var resultados = [];
+    let palabra = buscador.value;
+    let resultados = [];
     for (var i = 0; i < baseDatos.length; i++)
     {
         if (baseDatos[i].nombre.toLowerCase().includes(palabra.toLowerCase()))
@@ -47,13 +49,17 @@ function busqueda()
             resultados.push(baseDatos[i]);
         }
     }
-    document.getElementById("resultados").innerHTML= "";
+    // console.log(resultados, divResultados);
+
+    divResultados.innerHTML= "";
+    let nuevoInnerHTML="";
     for (var i = 0; i < resultados.length; i++)
     {
-        document.getElementById("resultados").innerHTML += "<p>" + resultados[i].nombre + "-" + resultados[i].artista;
-        document.getElementById("resultados").innerHTML += "<button onclick='reproducir(" + resultados[i].id + ")'>Reproducir</button>";
-        document.getElementById("resultados").innerHTML += "<button onclick='agregarALista(" + resultados[i].id + ")'>Agregar</button>" + "</p>";
+        nuevoInnerHTML += "<p>" + resultados[i].nombre + "-" + resultados[i].artista;
+        nuevoInnerHTML += "<button onclick='reproducir(" + resultados[i].id + ")'>Reproducir</button>";
+        nuevoInnerHTML += "<button onclick='agregarALista(" + resultados[i].id + ")'>Agregar</button>" + "</p>";
     }
+    divResultados.innerHTML = nuevoInnerHTML;
 }
 let player;
 function reproducir(id)
@@ -79,3 +85,13 @@ function reproducir(id)
         }
     }    
 }
+
+
+buscador.addEventListener("keydown", (event)=>{
+    if(event.key === "Enter"){
+        busqueda();
+    }
+});
+btnBuscar.addEventListener("click", ()=>{
+    busqueda();
+});

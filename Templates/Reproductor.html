@@ -6,7 +6,6 @@
     <meta charset='UTF-8'>
     <link rel="stylesheet" type="text/css" href="../Statics/CSS/estilosRep.css">
     <script src="../Dynamics/JS/BaseDeDatos.js"></script>  
-    <script src="../Dynamics/JS/Reproductor.js"></script>
     <script src="https://youtube.com/iframe_api"></script>
 </head>
 <body>
@@ -19,8 +18,11 @@
         <h2>
             Buscador de Canciones
         </h2>
-        <input type='text' id='buscador' placeholder='Buscar Algo'/>
-        <button id='botBuscar' onclick='busqueda()'>Buscar</button>
+        <div class="flexRow">
+            <input type='text' id='buscador' placeholder='Buscar Algo'/>
+            <button id='btnBuscar'>Buscar</button>
+        </div>
+        
         <br>
         <div id='resultados'></div>
         <div id='playerContainer'></div>
@@ -35,5 +37,5 @@
         <br>
         <div id='listaContainer'></div>
     </div>
-
+    <script src="../Dynamics/JS/Reproductor.js"></script>
 </body>
