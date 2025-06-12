@@ -37,8 +37,7 @@ function JSONToArray(json)
 }
 
 let bdCanciones = JSONToArray(baseDatosJSON);
-const buscador = document.getElementById("buscador");
-const divResultados = document.getElementById("resultados");
+
 const btnBuscar = document.getElementById("btnBuscar");
 const divSecPlayer = document.getElementById("divSecPlayer");
 
@@ -251,14 +250,6 @@ class ListaDeReproduccion{
     }
 
 
-buscador.addEventListener("keydown", (event)=>{
-    if(buscador.value === "" || event.key === "Backspace"){
-        divResultados.innerHTML= "";
-    } else {
-        busqueda();
-    }
-    
-});
 btnBuscar.addEventListener("click", ()=>{
     busqueda();
 });
