@@ -74,7 +74,7 @@ button:hover {
     padding: 10px;
     background: #333;
     border-radius: 5px;
-    max-height: 300px;
+    /* max-height: 300px; */
     overflow-y: auto;
 }
 
@@ -118,4 +118,43 @@ button:hover {
 
 #divSecPlayer{
     display: none;
+}
+
+
+/* Clases para canciones desplegadas del buscador */
+.cancionItem {
+    display: flex;
+    flex-direction: column;
+    background: #444;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s;
+}
+
+.cancionItem:hover {
+    transform: scale(1.02);
+    background: #505050;
+}
+
+.tituloCancion {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffcc00;
+    margin-bottom: 8px;
+}
+
+.infoCancion {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 10px;
+    color: #ddd;
+    font-size: 0.95rem;
+}
+
+.botonesCancion {
+    display: flex;
+    gap: 10px;
 }
