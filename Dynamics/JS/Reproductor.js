@@ -25,7 +25,7 @@ function JSONToArray(json)
     return bd; 
 }
 
-var baseDatos = JSONToArray(baseDeDatosJSON);
+var baseDatos = JSONToArray(baseDatosJSON);
 
 
 function busqueda()
