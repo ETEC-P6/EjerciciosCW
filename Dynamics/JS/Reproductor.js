@@ -6,7 +6,7 @@ const ICON_GENERO = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 51
 
 function JSONToArray(json)
 {
-    console.log(json);
+    //console.log(json);
     const bd = new Array(); 
 
     //Para canciones
@@ -26,8 +26,12 @@ let bdCancionHasArtista = baseDatosJSON.cancion_has_artista;
 
 const divSecPlayer = document.getElementById("divSecPlayer");
 
+function contenido(tipo, id){
+    console.log(`Me presionaste soy tipo: ${tipo} y con id: ${id}`);
+}
+
 function generarSeccion(resultados){
-    console.log(resultados);
+    //console.log(resultados);
     divResultados.innerHTML= "";
     for (var i = 0; i < resultados.length; i++)
     {
@@ -35,20 +39,35 @@ function generarSeccion(resultados){
         let nuevoInnerHTML = "";
 
         let icon = resultados[i].tipo == "cancion" ? ICON_SONG : resultados[i].tipo == "artista" ? ICON_ARTIS : resultados[i].tipo == "album" ? ICON_ALBUM : ICON_GENERO;
-        console.log(icon);
+        //console.log(resultados);
         let spanTitulo = document.createElement("span");
         spanTitulo.classList.add("tituloCancion");
-        spanTitulo.innerText = (resultados[i]=="cancion")? resultados[i].nombre + " - " + resultados[i].artista: resultados[i].nombre;
+        spanTitulo.innerText = (resultados[i].tipo=="cancion")? resultados[i].nombre + " - " + resultados[i].artista : resultados[i].nombre;
 
-        let infoCancion = (resultados[i].tipo == "cancion")? 
+        let infoCancion = (resultados[i].tipo == "cancion")?
                                         `<span data-set="${resultados[i].id_album}" onclick="contenido("album", resultados[i].id_album)">Álbum: ${resultados[i].album}</span>
                                         <span data-set="${resultados[i].id_genero}">Género: ${resultados[i].genero}</span>` : "";
         let botonesCancion = (resultados[i].tipo == "cancion")?  
                                 `<button onclick="reproducir(${resultados[i].id})">Reproducir</button>
                                 <button onclick="agregarALista(${resultados[i].id})">Agregar</button>`: "";
 
-        nuevoP.setAttribute("data-set", resultados[i].id);
-        nuevoP.classList.add("cancionItem");
+        
+        nuevoP.addEventListener("click", (evento)=>{
+            let elementoEventoDetonado = evento.currentTarget;
+            let tipoBusqueda = elementoEventoDetonado.getAttribute("resBuscItem");
+            let idBusqueda = elementoEventoDetonado.dataset.id;
+            //console.log(evento.currentTarget.getAttribute("resBuscItem"));
+            contenido(tipoBusqueda, idBusqueda);
+            
+        });
+
+        nuevoP.setAttribute("data-id", resultados[i].id);        
+
+        let claseTipoResBusc = (resultados[i].tipo == "cancion")? "resBuscCancion"
+                                                    : (resultados[i].tipo == "album")? "resBuscAlbum" : "resBuscArtista";
+        nuevoP.classList.add("resBuscCancion");
+        nuevoP.setAttribute("resBuscItem", claseTipoResBusc);
+
         nuevoInnerHTML += `<div class="flexRow contIconInfoCancion">
                                 <div class="iconoCancion">
                                     ${icon}
@@ -105,7 +124,7 @@ function busqArtistas(palabra, resultados){
 }
 function busqGeneros(palabra, resultados){
     let generos = bdGeneros;
-    console.log(generos);
+    //console.log(generos);
     for (var i = 0; i < generos.length; i++)
     {
         if (generos[i].nombre.toLowerCase().includes(palabra.toLowerCase()))
@@ -135,7 +154,7 @@ function busqueda()
     busqAlbums(palabra, resultados);
     busqGeneros(palabra, resultados);
     
-    console.log(resultados);
+    //console.log(resultados);
     if (resultados.length > 0)
     {
         generarSeccion(resultados);
@@ -146,9 +165,6 @@ function busqueda()
     }
 }
 
-function contenido(tipo, id){
-
-}
 let player;
 function reproducir(id)
 {
