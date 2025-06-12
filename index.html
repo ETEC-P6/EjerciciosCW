@@ -1,11 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MusicETE</title>
+    <link rel="stylesheet" href="./Statics/CSS/estilosRep.css">
+    <link rel="stylesheet" href="./Statics/CSS/estilosLandingPage.css">
 </head>
+
 <body>
-    
+
+    <!-- NAVBAR SUPERIOR -->
+    <nav id="navbarSuperior">
+        <div class="logo">MusicETE</div>
+        <div id="contBuscador" class="buscador">
+            <!-- <input type="text" placeholder="Buscar canciones, artistas..."> -->
+        </div>
+        <div class="perfil"></div>
+    </nav>
+
+    <!-- COLUMNAS IZQUIERDA Y DERECHA FIJAS -->
+    <aside class="columna izquierda">
+        <!-- <p>Mi biblioteca</p>
+        <p>Favoritos</p>
+        <p>Playlists</p> -->
+        <p>Historial</p>
+    </aside>
+
+    <section class="columna centro">
+        <!-- Aquí va el contenido principal scrollable -->
+        <div id='resultados'></div>
+    </section>
+
+    <aside class="columna derecha">
+        <p>Cola de Reproducción</p>
+        <!-- <p>Configuración</p> -->
+    </aside>
+
+    <!-- NAVBAR INFERIOR (REPRODUCTOR) -->
+    <footer id="navbarReproductor">
+        Reproduciendo: Wake me up - Avicii
+    </footer>
+
+    <script src="./Dynamics/JS/baseDeDatos.js"></script>
+    <script src="./Dynamics/JS/Buscador.js"></script>
+    <script src="./Dynamics/JS/Reproductor.js"></script>
 </body>
+
 </html>
