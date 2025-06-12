@@ -115,3 +115,7 @@ button:hover {
 #btnBuscar{
     margin: 0;
 }
+
+#divSecPlayer{
+    display: none;
+}

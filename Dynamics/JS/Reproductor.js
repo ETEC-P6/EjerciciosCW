@@ -29,6 +29,7 @@ var baseDatos = JSONToArray(baseDatosJSON);
 const buscador = document.getElementById("buscador");
 const divResultados = document.getElementById("resultados");
 const btnBuscar = document.getElementById("btnBuscar");
+const divSecPlayer = document.getElementById("divSecPlayer");
 
 function busqueda()
 {
@@ -49,21 +50,25 @@ function busqueda()
             resultados.push(baseDatos[i]);
         }
     }
-    // console.log(resultados, divResultados);
+    console.log(resultados, divResultados);
 
     divResultados.innerHTML= "";
     let nuevoInnerHTML="";
     for (var i = 0; i < resultados.length; i++)
     {
-        nuevoInnerHTML += "<p>" + resultados[i].nombre + "-" + resultados[i].artista;
-        nuevoInnerHTML += "<button onclick='reproducir(" + resultados[i].id + ")'>Reproducir</button>";
-        nuevoInnerHTML += "<button onclick='agregarALista(" + resultados[i].id + ")'>Agregar</button>" + "</p>";
+        nuevoInnerHTML += `<p data-set="${resultados[i].id}"> ${resultados[i].nombre} - ${resultados[i].artista}
+                                <button onclick='reproducir(${resultados[i].id})'>Reproducir</button>
+                                <button onclick='agregarALista(${resultados[i].id})'>Agregar</button>
+                            </p>`;
     }
     divResultados.innerHTML = nuevoInnerHTML;
+    // divSecPlayer.style.display = ""
 }
 let player;
 function reproducir(id)
 {
+    divSecPlayer.style.display = "block";
+    
     for (var i = 0; i < baseDatos.length; i++)
     {
         if (baseDatos[i].id == id)
