@@ -73,9 +73,136 @@ function reproducir(id)
                     height: '390',
                     width: '640',
                     videoId: baseDatos[i].link,
-                    playerVars: { playsinline: 1 }
-            });
+                    playerVars: { playsinline: 1, autoplay: 1 }
+                });
         }
         }
     }    
 }
+let reproduciendo = false;
+
+function cancionAnterior(i)
+{
+    let nuevoID = i - 1;
+    if (nuevoID < 0)
+    {
+        nuevoID = baseDatos.length - 1;    
+    }
+    reproducir(baseDatos[nuevoID].id);
+}
+
+function cancionSiguiente(i)
+{
+    let nuevoID = i + 1;
+    if (nuevoID >= baseDatos.length)
+    {
+        nuevoID = 0;    
+    }
+    reproducir(baseDatos[nuevoID].id);
+}
+
+function playPausa()
+{
+    let iframe = document.querySelector('iframe');
+    if(reproduciendo = true)
+    {
+        
+        reproduciendo = false;    
+    }
+    else
+    {
+        
+        reproduciendo = true;
+    }
+}
+class ListaDeReproduccion{
+        constructor(arreglo){
+            this.lista = null;
+            if(!Array.isArray(arreglo))
+                this.lista = [];
+            else
+                this.lista = structuredClone(arreglo); 
+        }
+        
+        pop(indice){
+            let eliminado = this.lista[indice];
+            this.lista.splice(indice, 1);
+            return eliminado;
+        }
+
+        push(objeto){
+            this.lista.push(objeto);
+        }
+
+        getSize(){
+            return this.lista.length;
+        }
+        
+        shuffle(){
+            this.forEach(intercambia_shuffle);
+        }
+
+        forEach(accion){
+            for(let i = 0; i < this.lista.length; i++){
+                accion(this.lista, i);
+            }
+        }
+        toString(){
+            return this.lista.map(cancion => cancion.toString()).join(", ");
+        }
+    }
+
+    function intercambia_shuffle(arreglo,i){
+        let j = Math.floor(Math.random() * (i+1))
+        intercambia(arreglo,i,j);
+    }
+        
+    function intercambia(arreglo,a,b){
+        let c = arreglo[a];
+        arreglo[a] = arreglo[b];
+        arreglo[b] = c;
+    }
+
+    let listaReproduccion = new ListaDeReproduccion(baseDatos);
+
+    function agregarALista(id) 
+    {
+        for (var i = 0; i < listaReproduccion.lista.length; i++)
+        {
+            if(listaReproduccion.lista[i].id === id)
+                return;
+        }
+        
+        for (var j = 0; j < baseDatos.length; j++) 
+        {
+            if (baseDatos[j].id === id) 
+            {
+                listaReproduccion.push(baseDatos[j]);
+                mostrarLista();
+                return;
+            }
+        }        
+    }
+
+    function eliminarDeLista(index)
+    {
+        listaReproduccion.pop(index);
+        mostrarLista();
+    }
+
+    function mostrarLista()
+    {
+        document.getElementById("listaContainer").innerHTML = "";
+            for (var i = 0; i < listaReproduccion.lista.length; i++)
+            {
+                document.getElementById("listaContainer").innerHTML += "<p>" + listaReproduccion.lista[i].nombre + "-" + listaReproduccion.lista[i].artista;
+                document.getElementById("listaContainer").innerHTML += "<button onclick='reproducir(" + listaReproduccion.lista[i].id + ")'>Reproducir</button>";
+                document.getElementById("listaContainer").innerHTML += "<button onclick='eliminarDeLista(" + i + ")'>Eliminar</button>" + "</p>";
+            }
+    }
+
+    function mezclarLista()
+    {
+        listaReproduccion.shuffle();
+        mostrarLista();
+    }
