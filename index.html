@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./Statics/CSS/estilosLandingPage.css">
     <script src="https://youtube.com/iframe_api"></script>
     <script src="./Dynamics/JS/clases.js"></script>
-    <script src="./Dynamics/JS/baseDeDatos.js"></script>
+    <script src="./Dynamics/JS/BaseDeDatos.js"></script>
     
 </head>
 
@@ -46,12 +46,19 @@
 
     <!-- NAVBAR INFERIOR (REPRODUCTOR) -->
     <footer id="navbarReproductor">
-        Reproduciendo: Wake me up - Avicii
+        <section class="textoEstado" >
+            Reproduciendo: Wake me up - Avicii
+        </section>
+        <section class="botonesReproductor">
+            <button id="botonAnterior" onclick="cancionAnterior()">&#x23EA</div></button> <!--boton de retroceso (fast backwards)-->
+            <button id="botonPausa" onclick="playPausa()">&#x23F8</button><!--boton de pausa/continuar falta la implementación en código del toggle /&#x25B6-->
+            <button id="botonSiguiente" onclick="cancionSiguiente()">&#x23E9</button><!--boton de avance (fast forward)-->
+        </section>
+        
     </footer>
-
     
     <script src="./Dynamics/JS/Buscador.js"></script>
     <script src="./Dynamics/JS/Reproductor.js"></script>
-</body>
+</body> 
 
 </html>
