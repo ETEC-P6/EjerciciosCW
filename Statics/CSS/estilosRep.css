@@ -62,6 +62,12 @@ button:hover {
     background: #e6b800;
 }
 
+/* Contenedores para flex en row */
+.flexRow{
+    display: flex;
+    flex-direction: row;
+}
+
 /* Contenedores para resultados y lista de reproducción */
 #resultados, #listaContainer {
     margin-top: 15px;
@@ -100,4 +106,12 @@ button:hover {
 #listaContainer::-webkit-scrollbar-thumb {
     background: #ffcc00;
     border-radius: 4px;
+}
+
+
+#buscador{
+    margin-bottom: 0;
+}
+#btnBuscar{
+    margin: 0;
 }
