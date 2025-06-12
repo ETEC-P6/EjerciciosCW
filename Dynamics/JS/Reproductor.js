@@ -50,10 +50,12 @@ function generarSeccion(resultados){
         let nuevoInnerHTML = "";
         nuevoP.setAttribute("data-set", resultados[i].id);
         nuevoP.classList.add("cancionItem");
-        nuevoInnerHTML += `<span class="tituloCancion">${resultados[i].nombre} - ${resultados[i].artista}</span>
-                            <div class="infoCancion">
-                                <span data-set="${resultados[i].id_album}">Álbum: ${resultados[i].album}</span>
-                                <span data-set="${resultados[i].id_genero}">Género: ${resultados[i].genero}</span>
+        nuevoInnerHTML += `<div class="infoCancionItem">
+                                <span class="tituloCancion">${resultados[i].nombre} - ${resultados[i].artista}</span>
+                                <div class="infoCancion">
+                                    <span data-set="${resultados[i].id_album}">Álbum: ${resultados[i].album}</span>
+                                    <span data-set="${resultados[i].id_genero}">Género: ${resultados[i].genero}</span>
+                                </div>
                             </div>
                             <div class="botonesCancion">
                                 <button onclick="reproducir(${resultados[i].id})">Reproducir</button>

@@ -9,8 +9,8 @@ contBuscador.innerHTML = `
 
 const buscador = document.getElementById("buscador");
 
-buscador.addEventListener("keydown", (event)=>{
-    if(buscador.value === "" || event.key === "Backspace"){
+buscador.addEventListener("input", (event)=>{
+    if(buscador.value === "" || buscador.value === null || buscador.value === undefined) {
         divResultados.innerHTML= "";
     } else {
         busqueda();

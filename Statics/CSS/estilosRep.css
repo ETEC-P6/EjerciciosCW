@@ -124,7 +124,8 @@ button:hover {
 /* Clases para canciones desplegadas del buscador */
 .cancionItem {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-around;
     background: #444;
     padding: 15px;
     border-radius: 8px;
