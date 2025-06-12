@@ -7,6 +7,10 @@
     <title>MusicETE</title>
     <link rel="stylesheet" href="./Statics/CSS/estilosRep.css">
     <link rel="stylesheet" href="./Statics/CSS/estilosLandingPage.css">
+    <script src="https://youtube.com/iframe_api"></script>
+    <script src="./Dynamics/JS/clases.js"></script>
+    <script src="./Dynamics/JS/baseDeDatos.js"></script>
+    
 </head>
 
 <body>
@@ -29,8 +33,10 @@
     </aside>
 
     <section class="columna centro">
-        <!-- Aquí va el contenido principal scrollable -->
         <div id='resultados'></div>
+        <div id="divSecPlayer" class="section">
+        <div id='playerContainer'></div>
+    </div>
     </section>
 
     <aside class="columna derecha">
@@ -43,7 +49,7 @@
         Reproduciendo: Wake me up - Avicii
     </footer>
 
-    <script src="./Dynamics/JS/baseDeDatos.js"></script>
+    
     <script src="./Dynamics/JS/Buscador.js"></script>
     <script src="./Dynamics/JS/Reproductor.js"></script>
 </body>
