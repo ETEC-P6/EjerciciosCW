@@ -13,25 +13,25 @@ const fillables = document.querySelectorAll(".link-fillable");
 
 const ruta = window.location.pathname;
 const nombreArchivo = ruta.substring(ruta.lastIndexOf("/") + 1).toLowerCase();
-
+// console.log(nombreArchivo);
 fillables.forEach((element) => {
-    const tipo = element.dataset.tipo
+    const tipo = element.dataset.fillablelinkTipo;
     let link = linkFillables.get(tipo);
     
     if (nombreArchivo === secciones[0]) 
     {
-        if(element.dataset.tipo === "home" || element.dataset.tipo === "inicio") {
+        if(tipo === "home" || tipo === "inicio") {
             link = `./${link}`;
         } else {
             link = `./Templates/${link}`;
         }
     } else {
-        if (element.dataset.tipo === "home" || element.dataset.tipo === "inicio") {
+        if (tipo === "home" || tipo === "inicio") {
             link = `../${link}`;
         } else {
             link = `./${link}`;
         }
     }
-    console.log(link);
+    // console.log(link);
     element.setAttribute("href", link);
 });

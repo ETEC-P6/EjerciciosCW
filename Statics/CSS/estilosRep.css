@@ -66,11 +66,18 @@ button:hover {
     background: #e6b800;
 }
 
-/* Clases de uso general */
+/* CLASES DE USO GENERAL */
 /* Contenedores para flex en row */
+span{
+    align-content: center;
+}
 .flexRow{
     display: flex;
     flex-direction: row;
+}
+.flexCol{
+    display: flex;
+    flex-direction: column;
 }
 .show{
     display: block;
@@ -86,12 +93,15 @@ button:hover {
 }
 .icono-peq{
     align-content: center;
-    color: #5b5b5b;
+    /* color: #5b5b5b; */
     width: 30px;
     padding: 10px;
 }
 .cursor{
     cursor: pointer;
+}
+.img-peq{
+    max-width: 80px;
 }
 
 /* Contenedores para resultados y lista de reproducción */
@@ -153,9 +163,10 @@ button:hover {
 
 /* Clases para canciones desplegadas del BUSCADOR */
 .resBuscItem {
+    height: 12vh;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     background: #444;
     padding: 15px;
     border-radius: 8px;
@@ -170,6 +181,12 @@ button:hover {
     background: #505050;
 }
 
+.agregar-cancion svg:hover{
+    transform: scale(1.12);
+    fill:#ffcc00;
+
+}
+
 .tituloCancion {
     font-size: 1.2rem;
     font-weight: bold;
@@ -177,11 +194,14 @@ button:hover {
     margin-bottom: 8px;
 }
 
+.agregar-cancion{
+    fill: #bebebe;
+}
+
 .infoCancion {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    margin-bottom: 10px;
     color: #ddd;
     font-size: 0.95rem;
 }
@@ -195,6 +215,7 @@ button:hover {
     padding-left: 2%;
 }
 .contIconInfoCancion{
+    gap: 20px;  
     width: 80%;
     justify-content: left;
     align-items: center;

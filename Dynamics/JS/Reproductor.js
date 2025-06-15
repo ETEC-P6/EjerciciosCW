@@ -55,42 +55,66 @@ function reproducir(id)
         }
     }    
 }
+
+const tipoContenido = [
+    "cancion",
+    "artista",
+    "album",
+    "genero"
+];
+
 function contenido(tipo, id){
     console.log(`Me presionaste soy tipo: ${tipo} y con id: ${id}`);
+    if(tipo == "cancion"){
+        console.log("Voy a reproducir la canción con id: " + id);
+        reproducir(id);
+    }
 }
 
-const mapTipoContenido = {
-    "cancion": bdCanciones, 
-    "artista": bdArtistas,
-    "album": bdAlbums,
-    "genero": bdGeneros
-};
+const mapIconTipo = new Map([
+    ["cancion", ICON_SONG],
+    ["artista", ICON_ARTIS],
+    ["album", ICON_ALBUM],
+    ["genero", ICON_GENERO]
+]);
 
 function generarSeccion(resultados){
-    //console.log(resultados);
+    console.log(resultados);
     divResultados.innerHTML= "";
-    for (var i = 0; i < resultados.length; i++)
+    for (let i = 0; i < resultados.length; i++)
     {
         let nuevoP = document.createElement("p");
         let nuevoInnerHTML = "";
 
-        let icon = resultados[i].tipo == "cancion" ? ICON_SONG : resultados[i].tipo == "artista" ? ICON_ARTIS : resultados[i].tipo == "album" ? ICON_ALBUM : ICON_GENERO;
+        let icon = mapIconTipo.get(resultados[i].tipo);
         //console.log(resultados);
         let spanTitulo = document.createElement("span");
         spanTitulo.classList.add("tituloCancion");
         spanTitulo.innerText = (resultados[i].tipo=="cancion")? resultados[i].nombre + " - " + resultados[i].artista : resultados[i].nombre;
 
         let infoCancion = (resultados[i].tipo == "cancion")?
-                                        `<span data-set="${resultados[i].id_album}" onclick="contenido("album", resultados[i].id_album)">Álbum: ${resultados[i].album}</span>
-                                        <span data-set="${resultados[i].id_genero}">Género: ${resultados[i].genero}</span>` : "";
-        let botonesCancion = (resultados[i].tipo == "cancion")?  
-                                `<button onclick="reproducir(${resultados[i].id})">Reproducir</button>
-                                <button onclick="agregarALista(${resultados[i].id})">Agregar</button>`: "";
-
+                `<span data-set="${resultados[i].id_album}" onclick="contenido("album", resultados[i].id_album)">Álbum: ${resultados[i].album}</span>
+                <span data-set="${resultados[i].id_genero}">Género: ${resultados[i].genero}</span>` : 
+                `<div class="flexRow">
+                    <div class="icono-peq" style="padding-bottom : 0;">
+                        ${icon}
+                    </div>
+                    <span>${resultados[i].tipo}</span>
+                </div>`;
+        
+        let botonesCancion = document.createElement("div");
+        botonesCancion.classList.add("cursor", "icono-peq", "agregar-cancion");
+        botonesCancion.setAttribute("title", "Agregar a lista de reproducción");
+        botonesCancion.addEventListener("click", (evento)=>{
+            // console.log("Agregando a lista de reproducción: " + resultados[i].id);
+            agregarALista(resultados[i].id);
+            evento.stopPropagation();
+        });
+        botonesCancion.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zM200 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></svg>`;
         
         nuevoP.addEventListener("click", (evento)=>{
             let elementoEventoDetonado = evento.currentTarget;
-            let tipoBusqueda = elementoEventoDetonado.getAttribute("resBuscItem");
+            let tipoBusqueda = elementoEventoDetonado.dataset.resBuscItem;
             let idBusqueda = elementoEventoDetonado.dataset.id;
             //console.log(evento.currentTarget.getAttribute("resBuscItem"));
             contenido(tipoBusqueda, idBusqueda);
@@ -99,14 +123,16 @@ function generarSeccion(resultados){
 
         nuevoP.setAttribute("data-id", resultados[i].id);        
 
-        let claseTipoResBusc = (resultados[i].tipo == "cancion")? "resBuscCancion"
-                                                    : (resultados[i].tipo == "album")? "resBuscAlbum" : "resBuscArtista";
-        nuevoP.classList.add("resBuscCancion", "flexRow", "cursor");
-        nuevoP.setAttribute("resBuscItem", claseTipoResBusc);
+        let claseTipoResBusc = resultados[i].tipo;
+        nuevoP.dataset.resBuscItem = claseTipoResBusc;
 
+        nuevoP.classList.add("resBuscItem", "flexRow", "cursor");
         nuevoInnerHTML += `<div class="flexRow contIconInfoCancion">
-                                <div class="icono">
+                                <div class="icono" style="display: none;">
                                     ${icon}
+                                </div>
+                                <div>
+                                    <img src="${(resultados[i].url_img)?resultados[i].url_img:""}" alt="" class="img-peq">
                                 </div>
                                 <div class="infoCancionItem">
                                     ${spanTitulo.outerHTML}
@@ -114,12 +140,14 @@ function generarSeccion(resultados){
                                         ${infoCancion}
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <div class="botonesCancion">
-                                ${botonesCancion}
                             </div>`;
         nuevoP.innerHTML = nuevoInnerHTML;
+        let divBotonesCancion = document.createElement("div");
+        divBotonesCancion.classList.add("botonesCancion");
+        if(resultados[i].tipo == "cancion")
+            divBotonesCancion.appendChild(botonesCancion);
+        nuevoP.appendChild(divBotonesCancion);
+
         divResultados.appendChild(nuevoP);
     }
     // divResultados.innerHTML = nuevoInnerHTML;
