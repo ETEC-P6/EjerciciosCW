@@ -196,6 +196,13 @@ span{
 .albumCancion{
     font-weight: bold;
 }
+.albumCancion:hover{
+    color: #ffcc00;
+}
+
+.artista-cancion:hover{
+    color: white;
+}
 
 .agregar-cancion{
     fill: #bebebe;

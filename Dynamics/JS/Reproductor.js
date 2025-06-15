@@ -7,25 +7,7 @@ const ICON_ALBUM = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512
 const ICON_GENERO = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M465 7c-9.4-9.4-24.6-9.4-33.9 0L383 55c-2.4 2.4-4.3 5.3-5.5 8.5l-15.4 41-77.5 77.6c-45.1-29.4-99.3-30.2-131 1.6c-11 11-18 24.6-21.4 39.6c-3.7 16.6-19.1 30.7-36.1 31.6c-25.6 1.3-49.3 10.7-67.3 28.6C-16 328.4-7.6 409.4 47.5 464.5s136.1 63.5 180.9 18.7c17.9-17.9 27.4-41.7 28.6-67.3c.9-17 15-32.3 31.6-36.1c15-3.4 28.6-10.5 39.6-21.4c31.8-31.8 31-85.9 1.6-131l77.6-77.6 41-15.4c3.2-1.2 6.1-3.1 8.5-5.5l48-48c9.4-9.4 9.4-24.6 0-33.9L465 7zM208 256a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>`;
 const ICON_BUSCADOR = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>`;
 
-function JSONToArray(json)
-{
-    //console.log(json);
-    const bd = new Array(); 
 
-    //Para canciones
-    for (let i = 0; i < json.canciones.length; i++)
-        bd.push(new Cancion(json.canciones[i].id, json.canciones[i].nombre, json.canciones[i].artista, json.canciones[i].album, json.canciones[i].link, json.canciones[i].genero, json.canciones[i].id_artista, json.canciones[i].id_genero, json.canciones[i].id_album));
-    // console.log(bd);
-    return bd; 
-}
-
-let bdCanciones = JSONToArray(baseDatosJSON);
-// let bdArtistas = baseDatosJSON.artistas.map(artista => new Artista(artista.id, artista.nombre, artista.genero, artista.link));
-let bdArtistas = baseDatosJSON.artistas;
-let bdGeneros = baseDatosJSON.genero;
-let bdAlbums = baseDatosJSON.album;
-let bdCancionHasArtista = baseDatosJSON.cancion_has_artista;
-// console.log(bdArtistas);
 
 const divSecPlayer = document.getElementById("divSecPlayer");
 
@@ -56,18 +38,27 @@ function reproducir(id)
     }    
 }
 
-const tipoContenido = [
-    "cancion",
-    "artista",
-    "album",
-    "genero"
-];
 
 function contenido(tipo, id){
     console.log(`Me presionaste soy tipo: ${tipo} y con id: ${id}`);
     if(tipo == "cancion"){
         console.log("Voy a reproducir la canción con id: " + id);
         reproducir(id);
+    } else {
+        colaDePeticiones.agregarPeticion(new Peticion(tipo, id));
+        colaDePeticiones.procesarPeticiones();
+        let eventDetonators = document.querySelectorAll("[event-detonator]");
+        console.log(eventDetonators);
+        eventDetonators.forEach(element => {
+            console.log("Agregando evento click a: ", element);
+            element.addEventListener("click", (e) => {
+                let id = e.currentTarget.getAttribute("data-id");
+                let tipo = e.currentTarget.getAttribute("data-res-busc-item");
+                contenido(tipo, id);
+                // console.log(`ID: ${id}, Tipo: ${tipo}`);
+                // Aquí puedes agregar la lógica para manejar el evento de click
+            });
+        });
     }
 }
 
@@ -78,7 +69,7 @@ const mapIconTipo = new Map([
     ["genero", ICON_GENERO]
 ]);
 
-function generarSeccion(resultados){
+function generarBusqueda(resultados){
     console.log(resultados);
     divResultados.innerHTML= "";
     for (let i = 0; i < resultados.length; i++)
@@ -90,10 +81,29 @@ function generarSeccion(resultados){
         //console.log(resultados);
         let spanTitulo = document.createElement("span");
         spanTitulo.classList.add("tituloCancion");
-        spanTitulo.innerText = (resultados[i].tipo=="cancion")? resultados[i].nombre + " - " + resultados[i].artista : resultados[i].nombre;
+
+        if(resultados[i].tipo=="cancion"){
+            spanTitulo.innerHTML = `${resultados[i].nombre} - `;
+            let span2 = document.createElement("span");
+            span2.classList.add("artista-cancion");
+            span2.innerHTML = `${resultados[i].artista}`;
+            console.log("ID del artista: " + resultados[i].id_artista);
+            span2.addEventListener("click", (evento)=>{
+                evento.stopPropagation();
+                let idArtista = resultados[i].id_artista;
+                consoe.log("ID del artista: " + idArtista);
+                contenido("artista", idArtista);
+                
+            });
+
+            spanTitulo.appendChild(span2);
+        } else {
+            spanTitulo.innerHTML = resultados[i].nombre;
+        }
+    
 
         let infoCancion = (resultados[i].tipo == "cancion")?
-                `<span class="albumCancion" data-set="${resultados[i].id_album}" onclick="contenido('album', resultados[i].id_album)">Álbum: ${resultados[i].album}</span>
+                `<span class="albumCancion" data-set="${resultados[i].id_album}" onclick="contenido('album', ${resultados[i].id_album})">Álbum: ${resultados[i].album}</span>
                 <span data-set="${resultados[i].id_genero}">Género: ${resultados[i].genero}</span>` : 
                 `<div class="flexRow">
                     <div class="icono-peq" style="padding-bottom : 0;">
@@ -107,8 +117,8 @@ function generarSeccion(resultados){
         botonesCancion.setAttribute("title", "Agregar a lista de reproducción");
         botonesCancion.addEventListener("click", (evento)=>{
             // console.log("Agregando a lista de reproducción: " + resultados[i].id);
-            agregarALista(resultados[i].id);
             evento.stopPropagation();
+            agregarALista(resultados[i].id);
         });
         botonesCancion.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zM200 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></svg>`;
         
@@ -221,7 +231,7 @@ function busqueda()
     //console.log(resultados);
     if (resultados.length > 0)
     {
-        generarSeccion(resultados);
+        generarBusqueda(resultados);
     }
     else
     {

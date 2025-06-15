@@ -254,6 +254,56 @@ const baseDatosJSON = {
       id_artista: 8,
       descripcion: "'Caifanes' es el álbum debut de la banda mexicana, que fusiona rock y música latina, estableciendo su legado en la escena musical.",
       url_img: "https://i.scdn.co/image/ab67616d00001e0252842eb76a050aa8daec1251"
+    },
+    {
+      id: 9,
+      nombre: "El Diablito",
+      artista: "Caifanes",
+      id_artista: 8,
+      descripcion: "'El Diablito' es un álbum que marcó un hito en la música rock en español, con letras poéticas y una fusión de géneros.",
+      url_img: "https://upload.wikimedia.org/wikipedia/en/5/5c/Caifanes_ElDiablitoLP_cover.jpeg"
+    },
+    {
+      id: 10,
+      nombre: "El Silencio",
+      artista: "Caifanes",
+      id_artista: 8,
+      descripcion: "'El Silencio' es un álbum emblemático de Caifanes, que consolidó su estatus como una de las bandas más influyentes del rock en español.",
+      url_img: "https://i.scdn.co/image/ab67616d0000b273bc4d989c48ad5b154fb0781d"
+    },
+    {
+      id: 11,
+      nombre: "El Nervio del Volcán",
+      artista: "Caifanes",
+      id_artista: 8,
+      descripcion: "'El Nervio del Volcán' es un álbum que muestra la evolución musical de Caifanes, con letras profundas y una fusión de géneros.",
+      url_img: "https://i.scdn.co/image/ab67616d0000b27336aeaab4dc91a8dea53a2d8f"
     }
   ]
 };
+
+function JSONToArray(json)
+{
+    //console.log(json);
+    const bd = new Array(); 
+
+    //Para canciones
+    for (let i = 0; i < json.canciones.length; i++)
+        bd.push(new Cancion(json.canciones[i].id, json.canciones[i].nombre, json.canciones[i].artista, json.canciones[i].album, json.canciones[i].link, json.canciones[i].genero, json.canciones[i].id_artista, json.canciones[i].id_genero, json.canciones[i].id_album));
+    // console.log(bd);
+    return bd; 
+}
+
+let bdCanciones = JSONToArray(baseDatosJSON);
+// let bdArtistas = baseDatosJSON.artistas.map(artista => new Artista(artista.id, artista.nombre, artista.genero, artista.link));
+let bdArtistas = baseDatosJSON.artistas;
+let bdGeneros = baseDatosJSON.genero;
+let bdAlbums = baseDatosJSON.album;
+let bdCancionHasArtista = baseDatosJSON.cancion_has_artista;
+
+const tipoContenido = new Map([
+    ["cancion", bdCanciones],
+    ["artista", bdArtistas],
+    ["album", bdAlbums],
+    ["genero", bdGeneros]
+]);
