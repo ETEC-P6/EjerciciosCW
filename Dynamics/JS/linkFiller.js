@@ -6,7 +6,7 @@ const linkFillables = new Map([
     ["home", "index.html"],
     ["perfil", "perfil.html"],
     ["inicio", "index.html"],
-    ["buscador", "busqueda.html"]
+    ["buscador", "busquedas.html"]
 ]);
 
 const fillables = document.querySelectorAll(".link-fillable");
