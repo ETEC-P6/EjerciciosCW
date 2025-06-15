@@ -71,25 +71,36 @@ function contenido(tipo, id){
     }
 }
 
-
+const mapIconTipo = new Map([
+    ["cancion", ICON_SONG],
+    ["artista", ICON_ARTIS],
+    ["album", ICON_ALBUM],
+    ["genero", ICON_GENERO]
+]);
 
 function generarSeccion(resultados){
-    //console.log(resultados);
+    console.log(resultados);
     divResultados.innerHTML= "";
     for (let i = 0; i < resultados.length; i++)
     {
         let nuevoP = document.createElement("p");
         let nuevoInnerHTML = "";
 
-        let icon = resultados[i].tipo == "cancion" ? ICON_SONG : resultados[i].tipo == "artista" ? ICON_ARTIS : resultados[i].tipo == "album" ? ICON_ALBUM : ICON_GENERO;
+        let icon = mapIconTipo.get(resultados[i].tipo);
         //console.log(resultados);
         let spanTitulo = document.createElement("span");
         spanTitulo.classList.add("tituloCancion");
         spanTitulo.innerText = (resultados[i].tipo=="cancion")? resultados[i].nombre + " - " + resultados[i].artista : resultados[i].nombre;
 
         let infoCancion = (resultados[i].tipo == "cancion")?
-                                        `<span data-set="${resultados[i].id_album}" onclick="contenido("album", resultados[i].id_album)">Álbum: ${resultados[i].album}</span>
-                                        <span data-set="${resultados[i].id_genero}">Género: ${resultados[i].genero}</span>` : "";
+                `<span data-set="${resultados[i].id_album}" onclick="contenido("album", resultados[i].id_album)">Álbum: ${resultados[i].album}</span>
+                <span data-set="${resultados[i].id_genero}">Género: ${resultados[i].genero}</span>` : 
+                `<div class="flexRow">
+                    <div class="icono-peq" style="padding-bottom : 0;">
+                        ${icon}
+                    </div>
+                    <span>${resultados[i].tipo}</span>
+                </div>`;
         
         let botonesCancion = document.createElement("div");
         botonesCancion.classList.add("cursor", "icono-peq", "agregar-cancion");
@@ -117,8 +128,11 @@ function generarSeccion(resultados){
 
         nuevoP.classList.add("resBuscItem", "flexRow", "cursor");
         nuevoInnerHTML += `<div class="flexRow contIconInfoCancion">
-                                <div class="icono">
+                                <div class="icono" style="display: none;">
                                     ${icon}
+                                </div>
+                                <div>
+                                    <img src="${(resultados[i].url_img)?resultados[i].url_img:""}" alt="" class="img-peq">
                                 </div>
                                 <div class="infoCancionItem">
                                     ${spanTitulo.outerHTML}

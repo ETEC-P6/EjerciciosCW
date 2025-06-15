@@ -139,7 +139,8 @@ const baseDatosJSON = {
     {
       id: 8,
       nombre: "Caifanes",
-      descripcion: "Caifanes es una influyente banda mexicana de rock, conocida por su fusión de rock y música latina, y por sus letras poéticas."
+      descripcion: "Caifanes es una influyente banda mexicana de rock, conocida por su fusión de rock y música latina, y por sus letras poéticas.",
+      url_img: "https://images.genius.com/4be6ac6517dde5a18eb0f2f9a28f0ce7.952x952x1.jpg"
     },
     {
       id: 9,
@@ -227,31 +228,32 @@ const baseDatosJSON = {
     },
     {
       id: 5,
-      nombre: "'Despacito'",
+      nombre: "Despacito",
       artista: "Luis Fonsi ft. Daddy Yankee",
       id_artista: 5,
       descripcion: "'Despacito' es un sencillo icónico que ha alcanzado el estatus de fenómeno mundial, fusionando ritmos latinos con pop."
     },
     {
       id: 6,
-      nombre: "'Divide'",
+      nombre: "Divide",
       artista: "Ed Sheeran",
       id_artista: 6,
       descripcion: "'Divide' es un álbum aclamado por la crítica que presenta una variedad de estilos musicales, destacando la versatilidad de Ed Sheeran."
     },
     {
       id: 7,
-      nombre: "'A Night at the Opera'",
+      nombre: "A Night at the Opera",
       artista: "Queen",
       id_artista: 7,
       descripcion: "'A Night at the Opera' es un álbum clásico de Queen, conocido por su innovador sonido y la épica 'Bohemian Rhapsody'."
     },
     {
       id: 8,
-      nombre: "'Caifanes'",
+      nombre: "Caifanes",
       artista: "Caifanes",
       id_artista: 8,
-      descripcion: "'Caifanes' es el álbum debut de la banda mexicana, que fusiona rock y música latina, estableciendo su legado en la escena musical."
+      descripcion: "'Caifanes' es el álbum debut de la banda mexicana, que fusiona rock y música latina, estableciendo su legado en la escena musical.",
+      url_img: "https://i.scdn.co/image/ab67616d00001e0252842eb76a050aa8daec1251"
     }
   ]
 };
