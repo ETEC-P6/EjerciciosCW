@@ -29,9 +29,42 @@ let bdCancionHasArtista = baseDatosJSON.cancion_has_artista;
 
 const divSecPlayer = document.getElementById("divSecPlayer");
 
+let player;
+function reproducir(id)
+{
+    divSecPlayer.style.display = "block";
+    
+    for (var i = 0; i < bdCanciones.length; i++)
+    {
+        if (bdCanciones[i].id == id)
+        {
+            let contenedor = document.getElementById('playerContainer');
+
+            if (player) 
+                player.loadVideoById(id);
+            else 
+            {
+                contenedor.innerHTML = '<div id="player"></div>';
+                player = new YT.Player('player', {
+                    height: '390',
+                    width: '640',
+                    videoId: bdCanciones[i].link,
+                    playerVars: { playsinline: 1, autoplay: 1 }
+                });
+        }
+        }
+    }    
+}
 function contenido(tipo, id){
     console.log(`Me presionaste soy tipo: ${tipo} y con id: ${id}`);
 }
+
+const mapTipoContenido = {
+    "cancion": bdCanciones, 
+    "artista": bdArtistas,
+    "album": bdAlbums,
+    "genero": bdGeneros
+};
 
 function generarSeccion(resultados){
     //console.log(resultados);
@@ -168,32 +201,7 @@ function busqueda()
     }
 }
 
-let player;
-function reproducir(id)
-{
-    divSecPlayer.style.display = "block";
-    
-    for (var i = 0; i < bdCanciones.length; i++)
-    {
-        if (bdCanciones[i].id == id)
-        {
-            let contenedor = document.getElementById('playerContainer');
 
-            if (player) 
-                player.loadVideoById(id);
-            else 
-            {
-                contenedor.innerHTML = '<div id="player"></div>';
-                player = new YT.Player('player', {
-                    height: '390',
-                    width: '640',
-                    videoId: bdCanciones[i].link,
-                    playerVars: { playsinline: 1, autoplay: 1 }
-                });
-        }
-        }
-    }    
-}
 let reproduciendo = false;
 
 function cancionAnterior(i)

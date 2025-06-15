@@ -70,6 +70,9 @@ a.no-etiqueta-a {
     left: 0;
     width: 20vw;
     background-color: #1e1e1e;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
 }
 
 .derecha {
@@ -86,8 +89,8 @@ a.no-etiqueta-a {
     padding: 10px;
 }
 
-.izquierda>div{
-    background-color: #2a2a2a;
+.izquierda>a>div{
+    background-color: #2a2a2a !important; 
     justify-content: start;
     gap: 1vw;
     color: #9a9a9a;
@@ -102,9 +105,11 @@ a.no-etiqueta-a {
 }
 
 .opcion-lateral{
+    fill: #5b5b5b;
     cursor: pointer;
     border-radius: 5px;
 }
+
 .opcion-lateral:hover , 
 .opcion-lateral:hover path{
     background-color: #5b5b5b;
