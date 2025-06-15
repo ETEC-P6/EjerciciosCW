@@ -193,6 +193,9 @@ span{
     color: #ffcc00;
     margin-bottom: 8px;
 }
+.albumCancion{
+    font-weight: bold;
+}
 
 .agregar-cancion{
     fill: #bebebe;
@@ -220,11 +223,27 @@ span{
     justify-content: left;
     align-items: center;
 }
+.w-100{
+    width: 100%;
+}
 
 
 /* PETICIONES */
+.tarjeta, .lista{
+    background-color: #444;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+.tarjeta:hover, .lista:hover{
+    transition: transform 0.2s;
+    transform: scale(1.02);
+}
+
 .tarjeta{
     align-self: center;
+    
 }
 .img-tar-grande{
     min-width: 100px;
@@ -250,4 +269,11 @@ span{
 .tarjeta img{
     max-width: 200px;
     min-width: 100px;
+}
+
+.lista{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 }

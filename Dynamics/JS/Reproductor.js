@@ -93,7 +93,7 @@ function generarSeccion(resultados){
         spanTitulo.innerText = (resultados[i].tipo=="cancion")? resultados[i].nombre + " - " + resultados[i].artista : resultados[i].nombre;
 
         let infoCancion = (resultados[i].tipo == "cancion")?
-                `<span data-set="${resultados[i].id_album}" onclick="contenido("album", resultados[i].id_album)">Álbum: ${resultados[i].album}</span>
+                `<span class="albumCancion" data-set="${resultados[i].id_album}" onclick="contenido('album', resultados[i].id_album)">Álbum: ${resultados[i].album}</span>
                 <span data-set="${resultados[i].id_genero}">Género: ${resultados[i].genero}</span>` : 
                 `<div class="flexRow">
                     <div class="icono-peq" style="padding-bottom : 0;">
