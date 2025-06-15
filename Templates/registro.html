@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <!-- <link rel="stylesheet" href="../../Statics/styles/forms.css">
+    <link rel="icon" href="../../Statics/media/logo.png" type="image/icon"> -->
+</head>
+<body>
+    <header>
+        <!-- <img src="../../Statics/media/EscudoP6.jpg" alt="ENP6" id="prepa6">
+        <img src="../../Statics/media/EscudoUNAM.jpg" alt="UNAM" id="UNAM"> -->
+    </header>
+    <main>
+        <form action="../Dynamics/JS/verifica.js" method="post" id="form-registro" enctype="multipart/form-data">
+            <h1>Crear cuenta</h1>
+            <img src="../../Statics/media/fotosPerfil/perfilVacio.png" alt="foto perfil" id="fotoPerfil" >
+            <article class="input" id="foto">
+                <input accept="image/*" type="file" name="arch" id="agregar">
+            </article>
+            <article class="input">
+                <input type="text" id="usuario" name="usuario" minlength="3" maxlength="15" placeholder="                 Nombre de usuario" required/><!-- Espacio en placeholder es para que se vea bien -->
+                <label for="usuario">
+                    <p class="campo">Usuario:</p>
+                </label>
+            </article>
+            <article class="input">
+                <input type="password" id="contraseña" name="contraseña" minlength="5" placeholder="                      Constraseña" required/>
+                <label for="contraseña">
+                    <p class="campo">Contraseña:</p>
+                </label>
+            </article>
+            <article class="input">
+                <label for="generos">
+                    <p class="campo">Por favor selecciona los géneros que te gustan:</p>
+                </label>
+                <label>
+                    <input type="checkbox" name="generos" value="rock"> Rock
+                    <!-- <img src="../../../Red_Coyote/Usuario/Statics/img/enjambre.jpg" alt="Rock" width="50"> Rock -->
+                    <input type="checkbox" name="generos" value="rock"> Rock
+                    <input type="checkbox" name="generos" value="rock"> Rock
+                </label><br>
+                <label>
+                    <input type="checkbox" name="generos" value="pop"> Pop
+                    <input type="checkbox" name="generos" value="rock"> Rock
+                    <input type="checkbox" name="generos" value="rock"> Rock
+                </label><br>
+                <label>
+                    <input type="checkbox" name="generos" value="jazz"> Jazz
+                    <input type="checkbox" name="generos" value="rock"> Rock
+                    <input type="checkbox" name="generos" value="rock"> Rock
+                </label><br>
+                <label>
+                    <input type="checkbox" name="generos" value="jazz"> Jazz
+                    <input type="checkbox" name="generos" value="rock"> Rock
+                    <input type="checkbox" name="generos" value="rock"> Rock
+                </label>
+            </article>
+            <article class="input">
+                <label for="sexo">
+                    <p class="campo">Por favor selecciona tu sexo:</p>
+                </label>
+                 <label for="sexo">Sexo:</label>
+                    <select name="sexo" id="sexo">
+                    <option value="">-- Selecciona una opción --</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="ND">Prefiero no decir</option>
+                    </select>
+            </article>
+            <article class="input">
+                <label>
+                    <input type="checkbox" id="acepto">
+                    Acepto los <a href="terminos.html" target="_blank">términos y condiciones</a>
+                </label>
+            </article>
+            <button type="submit">Crear cuenta</button>
+            <article class="text" id="cambio">Si ya tienes una cuenta, <a href="../login.html">inicia sesion.</a></article>
+        </form>
+    </main> 
+    <script src="../Dynamics/JS/fotoPerfil.js"></script> 
+    <script src="../Dynamics/JS/verifica.js" ></script>
+</body>
+</html>

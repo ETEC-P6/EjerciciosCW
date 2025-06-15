@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de sesión</title>
+    <!-- <link rel="stylesheet" href="./Statics/styles/forms.css"> -->
+    <!-- <link rel="icon" href="./Statics/media/logo.png" type="image/icon"> -->
+</head>
+<body>
+    <header>
+        <!-- <img src="./Statics/media/EscudoP6.jpg" alt="ENP6" id="prepa6"> -->
+        <!-- <img src="./Statics/media/EscudoUNAM.jpg" alt="UNAM" id="UNAM"> -->
+    </header>
+    <main>
+        <form action="./Dynamics/js/creaUsuarios.js" method="post">
+            <h1>Inicio de Sesión</h1>
+            <article class="input">
+                <input type="text" name="usuario" minlength="3" maxlength="15" placeholder="                 Nombre de usuario" required/><!-- Espacio en placeholder es para que se vea bien -->
+                <label for="usuario">
+                    <p class="campo">Usuario:</p>
+                </label>
+            </article>
+            <article class="input">
+                <input type="password" name="contraseña" minlength="5" placeholder="                      Constraseña" required/>
+                <label for="contraseña">
+                    <p class="campo">Contraseña:</p>
+                </label>
+            </article>
+            <button type="submit">Iniciar sesion</button>
+            <article class="text" id="cambio">Si no tienes una cuenta, <a href="./Templates/registro.html">crea una.</a></article>
+        </form>
+    </main>    
+</body>
+</html>
