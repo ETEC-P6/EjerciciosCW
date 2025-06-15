@@ -153,9 +153,10 @@ button:hover {
 
 /* Clases para canciones desplegadas del BUSCADOR */
 .resBuscItem {
+    height: 10vh;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     background: #444;
     padding: 15px;
     border-radius: 8px;
@@ -175,6 +176,10 @@ button:hover {
     font-weight: bold;
     color: #ffcc00;
     margin-bottom: 8px;
+}
+
+.agregar-cancion{
+    fill: #bebebe;
 }
 
 .infoCancion {
