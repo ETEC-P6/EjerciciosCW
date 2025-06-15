@@ -90,12 +90,12 @@ const baseDatosJSON = {
     },
     {
       id: 9,
-      nombre: "Hotel California",
-      artista: "Eagles",
+      nombre: "Viento",
+      artista: "Caifanes",
       id_artista: 8,
-      album: "Hotel California",
+      album: "Caifanes",
       id_album: 8,
-      link: "tLk1d4a0K5g",
+      link: "T8TtE-enslA",
       genero: "Rock",
       id_genero: 3
     }
@@ -138,8 +138,8 @@ const baseDatosJSON = {
     },
     {
       id: 8,
-      nombre: "Eagles",
-      descripcion: "Eagles es una banda estadounidense de rock, conocida por sus armonías vocales y éxitos atemporales como 'Hotel California'."
+      nombre: "Caifanes",
+      descripcion: "Caifanes es una influyente banda mexicana de rock, conocida por su fusión de rock y música latina, y por sus letras poéticas."
     },
     {
       id: 9,
@@ -248,10 +248,10 @@ const baseDatosJSON = {
     },
     {
       id: 8,
-      nombre: "'Hotel California'",
-      artista: "Eagles",
+      nombre: "'Caifanes'",
+      artista: "Caifanes",
       id_artista: 8,
-      descripcion: "'Hotel California' es un álbum icónico de Eagles, famoso por su título homónimo y su influencia duradera en el rock."
+      descripcion: "'Caifanes' es el álbum debut de la banda mexicana, que fusiona rock y música latina, estableciendo su legado en la escena musical."
     }
   ]
 };

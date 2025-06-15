@@ -90,6 +90,9 @@ button:hover {
     width: 30px;
     padding: 10px;
 }
+.cursor{
+    cursor: pointer;
+}
 
 /* Contenedores para resultados y lista de reproducción */
 #resultados, #listaContainer {
