@@ -66,10 +66,29 @@ button:hover {
     background: #e6b800;
 }
 
+/* Clases de uso general */
 /* Contenedores para flex en row */
 .flexRow{
     display: flex;
     flex-direction: row;
+}
+.show{
+    display: block;
+}
+.hide{
+    display: none;
+}
+.icono{
+    padding-left: 2%;
+    padding-right: 2%;
+    align-content: center;
+    min-width: 40px;
+}
+.icono-peq{
+    align-content: center;
+    color: #5b5b5b;
+    width: 30px;
+    padding: 10px;
 }
 
 /* Contenedores para resultados y lista de reproducción */
@@ -115,6 +134,9 @@ button:hover {
 
 #buscador{
     margin-bottom: 0;
+    background-color: #5b5b5b;
+    color: white;
+    height: 30px;
 }
 
 #btnBuscar{
@@ -126,7 +148,7 @@ button:hover {
 }
 
 
-/* Clases para canciones desplegadas del buscador */
+/* Clases para canciones desplegadas del BUSCADOR */
 .resBuscItem {
     display: flex;
     flex-direction: row;
@@ -173,10 +195,4 @@ button:hover {
     width: 80%;
     justify-content: left;
     align-items: center;
-}
-.iconoCancion{
-    padding-left: 2%;
-    padding-right: 2%;
-    align-content: center;
-    min-width: 40px;
 }
