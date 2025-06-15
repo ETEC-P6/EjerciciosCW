@@ -74,7 +74,7 @@ function generarSeccion(resultados){
         nuevoInnerHTML += `<div class="flexRow contIconInfoCancion">
                                 <div class="iconoCancion">
                                     ${icon}
-                                </div>
+                                </div>g
                                 <div class="infoCancionItem">
                                     ${spanTitulo.outerHTML}
                                     <div class="infoCancion">
