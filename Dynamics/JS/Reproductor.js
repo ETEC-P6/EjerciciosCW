@@ -68,6 +68,7 @@ function generarSeccion(resultados){
         let claseTipoResBusc = (resultados[i].tipo == "cancion")? "resBuscCancion"
                                                     : (resultados[i].tipo == "album")? "resBuscAlbum" : "resBuscArtista";
         nuevoP.classList.add("resBuscCancion");
+        nuevoP.classList.add("flexRow");
         nuevoP.setAttribute("resBuscItem", claseTipoResBusc);
 
         nuevoInnerHTML += `<div class="flexRow contIconInfoCancion">
