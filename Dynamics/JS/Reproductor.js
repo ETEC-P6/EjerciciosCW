@@ -282,14 +282,11 @@ class ListaDeReproduccion{
 
     let listaReproduccion = new ListaDeReproduccion(bdCanciones);
 
+    /**
+        El primer for que se tenía no estaba funcionando para nada.
+     */
     function agregarALista(id) 
     {
-        for (var i = 0; i < listaReproduccion.lista.length; i++)
-        {
-            if(listaReproduccion.lista[i].id === id)
-                return;
-        }
-        
         for (var j = 0; j < bdCanciones.length; j++) 
         {
             if (bdCanciones[j].id === id) 
@@ -298,7 +295,7 @@ class ListaDeReproduccion{
                 mostrarLista();
                 return;
             }
-        }        
+        }     
     }
 
     function eliminarDeLista(index)
@@ -312,7 +309,12 @@ class ListaDeReproduccion{
         document.getElementById("listaContainer").innerHTML = "";
             for (var i = 0; i < listaReproduccion.lista.length; i++)
             {
-                document.getElementById("listaContainer").innerHTML += "<p>" + listaReproduccion.lista[i].nombre + "-" + listaReproduccion.lista[i].artista;
+                document.getElementById("listaContainer").innerHTML += "<p> <span class = 'tituloCancion'>" + listaReproduccion.lista[i].nombre + "-" + listaReproduccion.lista[i].artista + "</span>";
+                /** Añado la verificación, en este caso vi que era con 'True', pero debemos de ver si se cambia para también cambiarlo aquí. */
+                const textoAlbum = (listaReproduccion.lista[i].album !== 'True') ? listaReproduccion.lista[i].album : 'Sin álbum';
+                console.log("tengo en listaReproduccion.lista[i].album " + listaReproduccion.lista[i].album);
+                
+                document.getElementById("listaContainer").innerHTML += "<p> <span> " + textoAlbum + "</span>";
                 document.getElementById("listaContainer").innerHTML += "<button onclick='reproducir(" + listaReproduccion.lista[i].id + ")'>Reproducir</button>";
                 document.getElementById("listaContainer").innerHTML += "<button onclick='eliminarDeLista(" + i + ")'>Eliminar</button>" + "</p>";
             }
