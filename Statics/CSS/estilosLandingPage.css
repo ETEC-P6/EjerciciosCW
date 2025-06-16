@@ -182,7 +182,7 @@ section.botonesReproductor{
 #navbar-reproductor-nombre{
     left: 15px !important;
 }
-@media (max-width: 600px) {
+@media (max-width: 800px) {
     #navbarReproductor>div{
         width: 100%;
     }
