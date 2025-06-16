@@ -7,6 +7,21 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.botonLista{
+    min-width: 40px;
+    max-width: 40px;
+}
+
+/*#listaContainer{
+    display: flex;
+    flex-direction: column;
+}*/
+
+.flexButton{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+}
 /* Título principal */
 h1 {
     text-align: center;
@@ -24,6 +39,13 @@ h1 {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+
+.section #playerContainer{
+    display: flex;
+    flex-basis: 10px;
+    flex-shrink: 1;
+    flex-grow: 1;
 }
 
 /* Encabezados de sección */
