@@ -32,6 +32,9 @@ formulario.addEventListener('submit', function(e){
     datos = JSON.parse(datos);
     let nombre = datos.nombre;
     let pw = datos.password;
+    let duracionCookie = 60*60*24*7;
+
+    document.cookie = `USUARIO=${nombre}`;
 
     if((usuario.value.trim() === nombre) && (password.value.trim() === pw))
         window.location.href = "./index.html";
