@@ -49,7 +49,12 @@ function reproducir(id)
                     height: '390',
                     width: '640',
                     videoId: bdCanciones[i].link,
-                    playerVars: { playsinline: 1, autoplay: 1 }
+                    playerVars: { playsinline: 1 },
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
+                    }
+                    
                 });
         }
         }
@@ -204,6 +209,22 @@ function busqueda()
 
 let reproduciendo = false;
 
+function onPlayerReady(event) {
+    // Opcional: reproducir cuando esté listo
+    event.target.playVideo();
+}
+
+function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.PLAYING) {
+        reproduciendo = true;
+        btnPausa.innerHTML = ICON_PAUSE;
+    } 
+    else if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) {
+        reproduciendo = false;
+        btnPausa.innerHTML = ICON_PLAY;
+    }
+}
+
 function cancionAnterior(i)
 {
     let nuevoID = i - 1;
@@ -226,21 +247,14 @@ function cancionSiguiente(i)
 
 let btnPausa = document.getElementById("btnPausa");
 btnPausa.innerHTML = ICON_PLAY;
-function playPausa()
-{
-    let iframe = document.querySelector('iframe');
-    if(reproduciendo = true)
-    {
-        reproduciendo = false; 
-        btnPausa.innerHTML = ICON_PLAY
-    }
-    else
-    {
-        
-        reproduciendo = true;
-        btnPausa.document.innerHTML = ICON_PAUSE;
+function playPausa() {
+    if (reproduciendo) {
+        player.pauseVideo();
+    } else {
+        player.playVideo();
     }
 }
+
 class ListaDeReproduccion{
         constructor(arreglo){
             this.lista = null;
