@@ -247,12 +247,9 @@ function cancionSiguiente(i)
 
 let btnPausa = document.getElementById("btnPausa");
 btnPausa.innerHTML = ICON_PLAY;
-<<<<<<< HEAD
-function playPausa() {
-    if (reproduciendo) {
-        player.pauseVideo();
-    } else {
-=======
+
+btnPausa.addEventListener("click", playPausa);
+
 function playPausa()
 {
     let iframe = document.querySelector('iframe');
@@ -267,7 +264,6 @@ function playPausa()
         
         reproduciendo = true;
         btnPausa.innerHTML = ICON_PAUSE;
->>>>>>> fc5a0e4fc7152ea2254c755273d1557e0e1a9da0
         player.playVideo();
     }
 }
