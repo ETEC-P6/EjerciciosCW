@@ -13,7 +13,58 @@ const ICON_ELIMINAR = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 
 const divSecPlayer = document.getElementById("divSecPlayer");
 const contenedor = document.getElementById('playerContainer');
 
+const navReprodNombre = document.getElementById("navbar-reproductor-nombre");
+
 let player;
+
+function cargarDatosCancionReproductor(i) {
+    navReprodNombre.innerHTML = "";
+    let divCancion = document.createElement("div");
+    // divCancion.classList.add("lista");
+    let div01 = document.createElement("div");
+    
+    let span1 = document.createElement("span");
+    span1.classList.add("tituloCancion");
+    span1.innerHTML = `${bdCanciones[i].nombre} - `;
+
+    let spanArt = document.createElement("span");
+    spanArt.classList.add("artista-cancion");
+    spanArt.innerText = bdCanciones[i].artista;
+    spanArt.addEventListener("click", (e) => {
+        e.stopPropagation();
+        let id = (()=>{
+            // let idArtista = bdAlbums.find(album => album.nombre === cancion.album).id_artista;
+            let idArtista = bdCanciones[i].id_artista;
+            // console.log(idArtista);
+            return idArtista;
+        })();
+        contenido("artista", id);
+    });
+    span1.appendChild(spanArt);
+
+    div01.appendChild(span1);
+
+    let div02 = document.createElement("div");
+    // div02.classList.add("infoCancion");
+
+    let span = document.createElement("span");
+    span.classList.add("albumCancion");
+    span.innerText = bdCanciones[i].album;
+    span.addEventListener("click", (e) => {
+        e.stopPropagation();
+        let id = (()=>{
+            let idAlbum = bdCanciones[i].id_album;                        
+            return idAlbum;
+        })();
+        contenido("album", id);
+    });
+    
+    
+    divCancion.appendChild(div01);
+    div02.appendChild(span);
+    divCancion.appendChild(div02);
+    navReprodNombre.appendChild(divCancion);
+}
 function reproducir(id)
 {
     divSecPlayer.style.display = "block";
@@ -24,14 +75,16 @@ function reproducir(id)
         {
             
 
-            if (player) 
+            if (player) {
                 player.loadVideoById(bdCanciones[i].link);
+                
+            }
             else 
             {
                 contenedor.innerHTML = '<div id="player"></div>';
                 player = new YT.Player('player', {
-                    height: '390',
-                    width: '640',
+                    height: '100%',
+                    width: '100%',
                     videoId: bdCanciones[i].link,
                     playerVars: { playsinline: 1 },
                     events: {
@@ -40,7 +93,8 @@ function reproducir(id)
                     }
                     
                 });
-        }
+            }
+            cargarDatosCancionReproductor(i);
         }
     }    
 }
@@ -101,7 +155,7 @@ function generarBusqueda(resultados){
             span2.addEventListener("click", (evento)=>{
                 evento.stopPropagation();
                 let idArtista = resultados[i].id_artista;
-                consoe.log("ID del artista: " + idArtista);
+                console.log("ID del artista: " + idArtista);
                 contenido("artista", idArtista);
                 
             });
@@ -112,15 +166,16 @@ function generarBusqueda(resultados){
         }
     
 
-        let infoCancion = (resultados[i].tipo == "cancion")?
-                `<span class="albumCancion" data-set="${resultados[i].id_album}" onclick="contenido('album', ${resultados[i].id_album})">Álbum: ${resultados[i].album}</span>
-                <span data-set="${resultados[i].id_genero}">Género: ${resultados[i].genero}</span>` : 
-                `<div class="flexRow">
-                    <div class="icono-peq" style="padding-bottom : 0;">
-                        ${icon}
-                    </div>
-                    <span>${resultados[i].tipo}</span>
-                </div>`;
+        // let infoCancion = (resultados[i].tipo == "cancion")?
+        //         `<span class="albumCancion" data-set="${resultados[i].id_album}" onclick="contenido('album', ${resultados[i].id_album})">Álbum: ${resultados[i].album}</span>
+        //         <span data-set="${resultados[i].id_genero}">Género: ${resultados[i].genero}</span>` : 
+        //         `<div class="flexRow">
+        //             <div class="icono-peq" style="padding-bottom : 0;">
+        //                 ${icon}
+        //             </div>
+        //             <span>${resultados[i].tipo}</span>
+        //         </div>`;
+
         
         let botonesCancion = document.createElement("div");
         botonesCancion.classList.add("cursor", "icono-peq", "agregar-cancion");
@@ -147,21 +202,83 @@ function generarBusqueda(resultados){
         nuevoP.dataset.resBuscItem = claseTipoResBusc;
 
         nuevoP.classList.add("resBuscItem", "flexRow", "cursor");
-        nuevoInnerHTML += `<div class="flexRow contIconInfoCancion">
-                                <div class="icono" style="display: none;">
-                                    ${icon}
-                                </div>
-                                <div>
-                                    <img src="${(resultados[i].url_img)?resultados[i].url_img:""}" alt="" class="img-peq">
-                                </div>
-                                <div class="infoCancionItem">
-                                    ${spanTitulo.outerHTML}
-                                    <div class="infoCancion">
-                                        ${infoCancion}
-                                    </div>
-                                </div>
-                            </div>`;
-        nuevoP.innerHTML = nuevoInnerHTML;
+        // nuevoInnerHTML += `<div class="flexRow contIconInfoCancion">
+        //                         <div class="icono" style="display: none;">
+        //                             ${icon}
+        //                         </div>
+        //                         <div>
+        //                             <img src="${(resultados[i].url_img)?resultados[i].url_img:""}" alt="" class="img-peq">
+        //                         </div>
+        //                         <div class="infoCancionItem">
+        //                             ${spanTitulo.outerHTML}
+        //                             <div class="infoCancion">
+        //                                 ${infoCancion}
+        //                             </div>
+        //                         </div>
+        //                     </div>`;
+        // nuevoP.innerHTML = nuevoInnerHTML;
+
+        let div = document.createElement("div");
+        div.classList.add("flexRow", "contIconInfoCancion");
+        let div2 = document.createElement("div");
+        div2.classList.add("icono");
+        div2.style.display = "none";
+        div2.innerHTML = icon;
+        div.appendChild(div2);
+        let divImg = document.createElement("div");
+        divImg.innerHTML = `<img src="${(resultados[i].url_img)?resultados[i].url_img:""}" alt="" class="img-peq">`;
+        div.appendChild(divImg);
+
+        let divInfo = document.createElement("div");
+        divInfo.classList.add("infoCancionItem");
+        // divInfo.innerHTML = spanTitulo.outerHTML;
+        divInfo.appendChild(spanTitulo);
+
+        let divInfoCancion = document.createElement("div");
+        divInfoCancion.classList.add("infoCancion");
+        // divInfoCancion.innerHTML = infoCancion;
+        if(resultados[i].tipo == "cancion"){
+            let spanInfoCancion = document.createElement("span");
+            spanInfoCancion.classList.add("albumCancion");
+            spanInfoCancion.setAttribute("data-id", resultados[i].id_album);
+            spanInfoCancion.setAttribute("data-res-busc-item", "album");
+            spanInfoCancion.innerHTML = `Álbum: ${resultados[i].album}`;
+            spanInfoCancion.addEventListener("click", (evento)=>{
+                evento.stopPropagation();
+                // let idAlbum = resultados[i].id_album;
+                contenido("album", resultados[i].id_album);
+            });
+            divInfoCancion.appendChild(spanInfoCancion);
+            let spanGenero = document.createElement("span");
+            spanGenero.setAttribute("data-id", resultados[i].id_genero);
+            spanGenero.setAttribute("data-res-busc-item", "genero");
+            spanGenero.innerHTML = `Género: ${resultados[i].genero}`;
+            spanGenero.addEventListener("click", (evento)=>{
+                evento.stopPropagation();
+                // let idGenero = resultados[i].id_genero;
+                contenido("genero", resultados[i].id_genero);
+            });
+            divInfoCancion.appendChild(spanGenero);
+        } else {
+            let divInfo = document.createElement("div");
+            divInfo.classList.add("flexRow");
+            let divIcono = document.createElement("div");
+            divIcono.classList.add("icono-peq");
+            divIcono.style.paddingBottom = "0";
+            divIcono.innerHTML = icon;
+            divInfo.appendChild(divIcono);
+            let spanTipo = document.createElement("span");
+            spanTipo.innerHTML = resultados[i].tipo;
+            divInfo.appendChild(spanTipo);
+            divInfoCancion.appendChild(divInfo);
+        }
+        divInfo.appendChild(divInfoCancion);
+        div.appendChild(divInfo);
+
+        nuevoP.appendChild(div);
+
+
+
         let divBotonesCancion = document.createElement("div");
         divBotonesCancion.classList.add("botonesCancion");
         if(resultados[i].tipo == "cancion")
@@ -289,24 +406,40 @@ slider.addEventListener('input', () => {
     player.seekTo(slider.value, true);
 });
 
+let indiceLista = 0;
+
+let btnSiguiente = document.getElementById("btnSiguiente");
+let btnAnterior = document.getElementById("btnAnterior");
+btnSiguiente.addEventListener('click', () => {
+    indiceLista = cancionSiguiente(indiceLista);
+    mostrarLista();
+});
+btnAnterior.addEventListener('click', () => {
+    indiceLista = cancionAnterior(indiceLista);
+    mostrarLista();
+});
+
 function cancionAnterior(i)
 {
     let nuevoID = i - 1;
     if (nuevoID < 0)
     {
-        nuevoID = bdCanciones.length - 1;    
+        nuevoID = listaReproduccion.getSize() - 1;    
     }
-    reproducir(bdCanciones[nuevoID].id);
+    reproducir(listaReproduccion.lista[nuevoID].id);
+    return nuevoID;
+    
 }
 
 function cancionSiguiente(i)
 {
     let nuevoID = i + 1;
-    if (nuevoID >= bdCanciones.length)
+    if (nuevoID >= listaReproduccion.getSize())
     {
         nuevoID = 0;    
     }
-    reproducir(bdCanciones[nuevoID].id);
+    reproducir(listaReproduccion.lista[nuevoID].id);
+    return nuevoID;
 }
 
 let btnPausa = document.getElementById("btnPausa");
@@ -404,21 +537,54 @@ class ListaDeReproduccion{
         mostrarLista();
     }
 
-    function mostrarLista()
-    {
-        document.getElementById("listaContainer").innerHTML = "";
-            for (var i = 0; i < listaReproduccion.lista.length; i++)
-            {
-                document.getElementById("listaContainer").innerHTML += "<p> <span class = 'tituloCancion'>" + listaReproduccion.lista[i].nombre + "-" + listaReproduccion.lista[i].artista + "</span>";
-                /** Añado la verificación, en este caso vi que era con 'True', pero debemos de ver si se cambia para también cambiarlo aquí. */
-                const textoAlbum = listaReproduccion.lista[i].album;
-                console.log("tengo en listaReproduccion.lista[i].album " + listaReproduccion.lista[i].album);
-                
-                document.getElementById("listaContainer").innerHTML += "<p> <span> " + textoAlbum + "</span>";
-                document.getElementById("listaContainer").innerHTML += "<span class='flexButton'> <button class='botonLista' onclick='reproducir(" + listaReproduccion.lista[i].id + ")'>" + ICON_PLAY + "</button>"
-                + "<button class='botonLista' onclick='eliminarDeLista(" + i + ")'>" + ICON_ELIMINAR + "</button> </span>" + "</p>";
-            }
+function mostrarLista() {
+    const listaContainer = document.getElementById("listaContainer");
+    listaContainer.innerHTML = "";
+
+    for (let i = indiceLista; i < listaReproduccion.lista.length; i++) {
+        const cancion = listaReproduccion.lista[i];
+
+        const p = document.createElement("p");
+
+        const titulo = document.createElement("span");
+        titulo.classList.add("tituloCancion");
+        titulo.textContent = `${cancion.nombre} - ${cancion.artista}`;
+
+        const album = document.createElement("span");
+        album.textContent = ` ${cancion.album}`;
+
+        const contenedorBotones = document.createElement("span");
+        contenedorBotones.classList.add("flexButton");
+
+        const btnPlay = document.createElement("button");
+        btnPlay.classList.add("botonLista");
+        btnPlay.innerHTML = ICON_PLAY;
+        btnPlay.onclick = () => {
+            indiceLista = i;
+            reproducir(cancion.id);
+            mostrarLista();
+        };
+
+        const btnEliminar = document.createElement("button");
+        btnEliminar.classList.add("botonLista");
+        btnEliminar.innerHTML = ICON_ELIMINAR;
+        btnEliminar.onclick = () => {
+            eliminarDeLista(i);
+        };
+
+        contenedorBotones.appendChild(btnPlay);
+        contenedorBotones.appendChild(btnEliminar);
+
+        p.appendChild(titulo);
+        p.appendChild(album);
+        p.appendChild(contenedorBotones);
+
+        listaContainer.appendChild(p);
+        }
     }
+
+
+
 
     function mezclarLista()
     {
