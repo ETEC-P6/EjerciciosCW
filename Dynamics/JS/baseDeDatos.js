@@ -299,7 +299,7 @@ let bdCanciones = JSONToArray(baseDatosJSON);
 let bdArtistas = baseDatosJSON.artistas;
 let bdGeneros = baseDatosJSON.genero;
 let bdAlbums = baseDatosJSON.album;
-let bdCancionHasArtista = baseDatosJSON.cancion_has_artista;
+//let bdCancionHasArtista = baseDatosJSON.cancion_has_artista;
 
 const tipoContenido = new Map([
     ["cancion", bdCanciones],
