@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MusicETE</title>
+    <link rel="stylesheet" href="../Statics/CSS/estilosRep.css">
+    <link rel="stylesheet" href="../Statics/CSS/estilosLandingPage.css">
+    <script src="https://youtube.com/iframe_api"></script>
+    <script src="../Dynamics/JS/clases.js"></script>
+    <script src="../Dynamics/JS/baseDeDatos.js"></script>
+    
+</head>
+
+<body>
+
+    <!-- NAVBAR SUPERIOR -->
+    <nav id="navbarSuperior">
+        <div class="logo">MusicETE</div>
+        <div class="perfil">
+            <p id="regresar">Regresar</p>
+        </div>
+    </nav>
+
+    <!-- COLUMNAS IZQUIERDA Y DERECHA FIJAS -->
+    <aside class="columna izquierda">
+        <!-- <p>Mi biblioteca</p>
+        <p>Favoritos</p>
+        <p>Playlists</p> -->
+        <p>Historial</p>
+    </aside>
+
+    <section class="columna centro">
+         <div id='resultados'>
+            <h1>Tu perfil</h1>
+            <img src="../Statics/media/img/perfilVacio.png" alt="foto perfil" id="fotoPerfil" >
+            <br><br><br>
+            <article class="texto">
+                <p id="usuario"></p>
+            </article>
+            <article class="texto">
+                <p id="contraseña"></p>
+            </article>
+            <article>
+                <p id="generos"></p>
+            </article>
+            <article>
+                <label>
+                    <p id="sexo"></p>
+                    </select>
+                </label>
+            </article>
+            <article></article>
+                <button id="editar" type="submit">Editar perfil</button>
+                <button id="cerrar" type="submit">Cerrar sesión</button>
+            </article>
+            <br><br>
+         </div>
+         <div id="edicion" style="display: none">
+                <form method="post" id="form-registro">
+                <h1>Editar cuenta</h1>
+                <img src="../Statics/media/img/perfilVacio.png" alt="foto perfil" id="fotoPerfil" >
+                <br><br><br>
+                <article class="texto">
+                    <label>
+                        <input type="text" id="usuario" name="usuario" minlength="3" maxlength="15" placeholder="   Nombre de usuario   " required/><!-- Espacio en placeholder es para que se vea bien -->
+                    </label>
+                </article>
+                <article class="texto">
+                    <label>
+                        <input type="password" id="contraseña" name="contraseña" minlength="5" placeholder="   Contraseña   " required/>
+                    </label>
+                </article>
+                <article>
+                    <br>
+                    <p>Por favor selecciona los géneros que te gustan:</p>
+                    <label id="generos">
+                        <div class="fila">
+                            <input type="checkbox" class="generos" name="generos" value="clasica"> Clásica
+                            <input type="checkbox" class="generos" name="generos" value="rock"> Rock
+                            <input type="checkbox" class="generos" name="generos" value="cumbia"> Cumbia
+                        </div>  
+                        <br>
+                        <div class="fila">
+                            <input type="checkbox" class="generos" name="generos" value="pop"> Pop
+                            <input type="checkbox" class="generos" name="generos" value="reggaeton"> Reggaeton
+                            <input type="checkbox" class="generos" name="generos" value="hipHop"> Hip Hop
+                        </div>
+                        <br>
+                        <div class="fila">
+                            <input type="checkbox" class="generos" name="generos" value="jazz"> Jazz
+                            <input type="checkbox" class="generos" name="generos" value="indie"> Indie
+                            <input type="checkbox" class="generos" name="generos" value="salsa"> Salsa
+                        </div>
+                        <br>
+                        <div class="fila">
+                            <input type="checkbox" class="generos" name="generos" value="k-pop"> K-Pop
+                                <input type="checkbox" class="generos" name="generos" value="blues"> Blues     
+                            <input type="checkbox" class="generos" name="generos" value="reggae"> Reggaeton
+                    </div>
+                        <br>
+                        <div class="fila">
+                            <input type="checkbox" class="generos" name="generos" value="country"> Country
+                            <input type="checkbox" class="generos" name="generos" value="punk"> Punk
+                            <input type="checkbox" class="generos" name="generos" value="metal"> Metal
+                        </div>
+                    </label>
+                </article>
+                <article id="inline">
+                    <label>
+                        <p>Por favor selecciona tu sexo:</p>
+                        <select name="sexo" id="sexo" required>
+                            <option value="">-- Selecciona una opción --</option>
+                            <option value="Femenino">Femenino</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="ND">Prefiero no decir</option>
+                        </select>
+                    </label>
+                </article>
+                <button id="actualizar">Actualizar</button>  
+                <button id="cancelar">Cancelar</button>  
+                <br><br>                  
+         </div>
+        <div id="divSecPlayer" class="section">
+        <div id='playerContainer'></div>
+    </div>
+    </section>
+
+    <aside class="columna derecha">
+        <p>Cola de Reproducción</p>
+        <!-- <p>Configuración</p> -->
+    </aside>
+
+    <!-- NAVBAR INFERIOR (REPRODUCTOR) -->
+    <footer id="navbarReproductor">
+        <section class="textoEstado" >
+            Reproduciendo: Wake me up - Avicii
+        </section>
+        <section class="botonesReproductor">
+            <button id="btnAnterior" class="botonesReproductor" onclick="cancionAnterior()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M493.6 445c-11.2 5.3-24.5 3.6-34.1-4.4L288 297.7 288 416c0 12.4-7.2 23.7-18.4 29s-24.5 3.6-34.1-4.4L64 297.7 64 416c0 17.7-14.3 32-32 32s-32-14.3-32-32L0 96C0 78.3 14.3 64 32 64s32 14.3 32 32l0 118.3L235.5 71.4c9.5-7.9 22.8-9.7 34.1-4.4S288 83.6 288 96l0 118.3L459.5 71.4c9.5-7.9 22.8-9.7 34.1-4.4S512 83.6 512 96l0 320c0 12.4-7.2 23.7-18.4 29z"/></svg></button> <!--boton de retroceso (fast backwards)-->
+            <button id="btnPausa" class="botonesReproductor"playPausa()"></button><!--boton de pausa/continuar falta la implementación en código del toggle /&#x25B6-->
+            <button id="btnSiguiente" class="botonesReproductor" onclick="cancionSiguiente()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M18.4 445c11.2 5.3 24.5 3.6 34.1-4.4L224 297.7 224 416c0 12.4 7.2 23.7 18.4 29s24.5 3.6 34.1-4.4L448 297.7 448 416c0 17.7 14.3 32 32 32s32-14.3 32-32l0-320c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 118.3L276.5 71.4c-9.5-7.9-22.8-9.7-34.1-4.4S224 83.6 224 96l0 118.3L52.5 71.4c-9.5-7.9-22.8-9.7-34.1-4.4S0 83.6 0 96L0 416c0 12.4 7.2 23.7 18.4 29z"/></svg></button>
+        </section>
+        
+    </footer>
+
+    <!-- <script src="../Dynamics/JS/Buscador.js"></script> -->
+    <script src="../Dynamics/JS/Reproductor.js"></script>
+    <script src="../Dynamics/JS/editarPerfil.js"></script>
+</body> 
+
+</html>
