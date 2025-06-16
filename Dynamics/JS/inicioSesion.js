@@ -34,7 +34,7 @@ formulario.addEventListener('submit', function(e){
     let pw = datos.password;
 
     if((usuario.value.trim() === nombre) && (password.value.trim() === pw))
-        window.location.href = "../../index.html";
+        window.location.href = "./index.html";
     else if((usuario.value.trim() === nombre)){
         e.preventDefault()
         alert('Usuario o contraseña incorrecta.')
