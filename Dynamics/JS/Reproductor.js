@@ -352,24 +352,40 @@ slider.addEventListener('input', () => {
     player.seekTo(slider.value, true);
 });
 
+let indiceLista = 0;
+
+let btnSiguiente = document.getElementById("btnSiguiente");
+let btnAnterior = document.getElementById("btnAnterior");
+btnSiguiente.addEventListener('click', () => {
+    indiceLista = cancionSiguiente(indiceLista);
+    mostrarLista();
+});
+btnAnterior.addEventListener('click', () => {
+    indiceLista = cancionAnterior(indiceLista);
+    mostrarLista();
+});
+
 function cancionAnterior(i)
 {
     let nuevoID = i - 1;
     if (nuevoID < 0)
     {
-        nuevoID = bdCanciones.length - 1;    
+        nuevoID = listaReproduccion.getSize() - 1;    
     }
-    reproducir(bdCanciones[nuevoID].id);
+    reproducir(listaReproduccion.lista[nuevoID].id);
+    return nuevoID;
+    
 }
 
 function cancionSiguiente(i)
 {
     let nuevoID = i + 1;
-    if (nuevoID >= bdCanciones.length)
+    if (nuevoID >= listaReproduccion.getSize())
     {
         nuevoID = 0;    
     }
-    reproducir(bdCanciones[nuevoID].id);
+    reproducir(listaReproduccion.lista[nuevoID].id);
+    return nuevoID;
 }
 
 let btnPausa = document.getElementById("btnPausa");
@@ -467,21 +483,54 @@ class ListaDeReproduccion{
         mostrarLista();
     }
 
-    function mostrarLista()
-    {
-        document.getElementById("listaContainer").innerHTML = "";
-            for (var i = 0; i < listaReproduccion.lista.length; i++)
-            {
-                document.getElementById("listaContainer").innerHTML += "<p> <span class = 'tituloCancion'>" + listaReproduccion.lista[i].nombre + "-" + listaReproduccion.lista[i].artista + "</span>";
-                /** Añado la verificación, en este caso vi que era con 'True', pero debemos de ver si se cambia para también cambiarlo aquí. */
-                const textoAlbum = listaReproduccion.lista[i].album;
-                console.log("tengo en listaReproduccion.lista[i].album " + listaReproduccion.lista[i].album);
-                
-                document.getElementById("listaContainer").innerHTML += "<p> <span> " + textoAlbum + "</span>";
-                document.getElementById("listaContainer").innerHTML += "<span class='flexButton'> <button class='botonLista' onclick='reproducir(" + listaReproduccion.lista[i].id + ")'>" + ICON_PLAY + "</button>"
-                + "<button class='botonLista' onclick='eliminarDeLista(" + i + ")'>" + ICON_ELIMINAR + "</button> </span>" + "</p>";
-            }
+function mostrarLista() {
+    const listaContainer = document.getElementById("listaContainer");
+    listaContainer.innerHTML = "";
+
+    for (let i = indiceLista; i < listaReproduccion.lista.length; i++) {
+        const cancion = listaReproduccion.lista[i];
+
+        const p = document.createElement("p");
+
+        const titulo = document.createElement("span");
+        titulo.classList.add("tituloCancion");
+        titulo.textContent = `${cancion.nombre} - ${cancion.artista}`;
+
+        const album = document.createElement("span");
+        album.textContent = ` ${cancion.album}`;
+
+        const contenedorBotones = document.createElement("span");
+        contenedorBotones.classList.add("flexButton");
+
+        const btnPlay = document.createElement("button");
+        btnPlay.classList.add("botonLista");
+        btnPlay.innerHTML = ICON_PLAY;
+        btnPlay.onclick = () => {
+            indiceLista = i;
+            reproducir(cancion.id);
+            mostrarLista();
+        };
+
+        const btnEliminar = document.createElement("button");
+        btnEliminar.classList.add("botonLista");
+        btnEliminar.innerHTML = ICON_ELIMINAR;
+        btnEliminar.onclick = () => {
+            eliminarDeLista(i);
+        };
+
+        contenedorBotones.appendChild(btnPlay);
+        contenedorBotones.appendChild(btnEliminar);
+
+        p.appendChild(titulo);
+        p.appendChild(album);
+        p.appendChild(contenedorBotones);
+
+        listaContainer.appendChild(p);
+        }
     }
+
+
+
 
     function mezclarLista()
     {
