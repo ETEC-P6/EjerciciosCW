@@ -121,8 +121,6 @@ function generarBusqueda(resultados){
         //             </div>
         //             <span>${resultados[i].tipo}</span>
         //         </div>`;
-        
-
 
         
         let botonesCancion = document.createElement("div");
