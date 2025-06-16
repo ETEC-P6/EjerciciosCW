@@ -26,6 +26,13 @@ h1 {
     box-shadow: 0 4px 12px rgba(0,0,0,0.6);
 }
 
+.section #playerContainer{
+    display: flex;
+    flex-basis: 10px;
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
 /* Encabezados de sección */
 .section h2 {
     font-size: 1.8rem;
