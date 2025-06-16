@@ -6,8 +6,10 @@ const linkFillables = new Map([
     ["home", "index.html"],
     ["perfil", "perfil.html"],
     ["inicio", "index.html"],
-    ["buscador", "Busquedas.html"]
+    ["buscador", "Busquedas.html"],
+    ["", "index.html"]
 ]);
+
 
 const fillables = document.querySelectorAll(".link-fillable");
 
@@ -20,13 +22,13 @@ fillables.forEach((element) => {
     
     if (nombreArchivo === secciones[0] || nombreArchivo == "") 
     {
-        if(tipo === "home" || tipo === "inicio") {
+        if(tipo === "home" || tipo === "inicio" || tipo == "") {
             link = `./${link}`;
         } else {
             link = `./Templates/${link}`;
         }
     } else {
-        if (tipo === "home" || tipo === "inicio") {
+        if (tipo === "home" || tipo === "inicio" || tipo == "") {
             link = `../${link}`;
         } else {
             link = `./${link}`;
