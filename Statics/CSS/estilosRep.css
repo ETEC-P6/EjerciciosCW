@@ -79,6 +79,12 @@ span{
     display: flex;
     flex-direction: column;
 }
+.just-c-cent{
+    justify-content: center;
+}
+.just-c-se{
+    justify-content: space-evenly;
+}
 .show{
     display: block;
 }
@@ -97,12 +103,30 @@ span{
     width: 30px;
     padding: 10px;
 }
+.icono-sup-peq{
+    align-content: center;
+    /* color: #5b5b5b; */
+    width: 10px;
+    padding: 10px;
+}
+.icono-sup-peq svg{
+    max-width: 30px;
+}
 .cursor{
     cursor: pointer;
 }
 .img-peq{
     max-width: 80px;
 }
+.para-hover{
+    fill: #9a9a9a;;
+
+}
+.para-hover:hover{
+    transform: scale(1.12);
+    fill:#ffcc00;
+}
+
 
 /* Contenedores para resultados y lista de reproducción */
 #resultados, #listaContainer {

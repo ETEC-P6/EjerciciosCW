@@ -45,20 +45,23 @@ function contenido(tipo, id){
         console.log("Voy a reproducir la canción con id: " + id);
         reproducir(id);
     } else {
+        colaDePeticiones.nuevaPeticion("new");
         colaDePeticiones.agregarPeticion(new Peticion(tipo, id));
         colaDePeticiones.procesarPeticiones();
-        let eventDetonators = document.querySelectorAll("[event-detonator]");
-        console.log(eventDetonators);
-        eventDetonators.forEach(element => {
-            console.log("Agregando evento click a: ", element);
-            element.addEventListener("click", (e) => {
-                let id = e.currentTarget.getAttribute("data-id");
-                let tipo = e.currentTarget.getAttribute("data-res-busc-item");
-                contenido(tipo, id);
-                // console.log(`ID: ${id}, Tipo: ${tipo}`);
-                // Aquí puedes agregar la lógica para manejar el evento de click
-            });
-        });
+        
+
+        // let eventDetonators = document.querySelectorAll("[event-detonator]");
+        // console.log(eventDetonators);
+        // eventDetonators.forEach(element => {
+        //     console.log("Agregando evento click a: ", element);
+        //     element.addEventListener("click", (e) => {
+        //         let id = e.currentTarget.getAttribute("data-id");
+        //         let tipo = e.currentTarget.getAttribute("data-res-busc-item");
+        //         contenido(tipo, id);
+        //         // console.log(`ID: ${id}, Tipo: ${tipo}`);
+        //         // Aquí puedes agregar la lógica para manejar el evento de click
+        //     });
+        // });
     }
 }
 

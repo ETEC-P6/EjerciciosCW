@@ -100,6 +100,11 @@ class PeticionEnDOM{
                     divAlbum.setAttribute("data-id", `${album.id}`);
                     divAlbum.setAttribute("data-res-busc-item", `${"album"}`);
 
+                    divAlbum.addEventListener("click", (e) => {
+                        let id = e.currentTarget.getAttribute("data-id");
+                        let tipo = e.currentTarget.getAttribute("data-res-busc-item");
+                        contenido(tipo, id);
+                    });
                     cont.appendChild(divAlbum);
                 }
             });
@@ -151,6 +156,13 @@ class PeticionEnDOM{
                     divCancion.setAttribute("data-id", `${cancion.id}`);
                     divCancion.setAttribute("data-res-busc-item", `${"cancion"}`);
 
+                    divCancion.addEventListener("click", (e) => {
+                        let id = e.currentTarget.getAttribute("data-id");
+                        let tipo = e.currentTarget.getAttribute("data-res-busc-item");
+                        contenido(tipo, id);
+                        
+                    });
+
                     cont.appendChild(divCancion);
                 }
             });
@@ -174,9 +186,45 @@ class ListaDePeticiones{
         }
         return null;
     }
+    limpiarPeticiones(){
+        this.peticiones = [];
+    }
+    nuevaPeticion(tipo){
+        if(tipo == "prev"){
+            if(this.peticiones.length > 0){
+                let pets = this.peticiones;
+                pilaDePeticionesForward.push(pets);
+                this.limpiarPeticiones();
+            }
+            if(pilaDePeticionesBackward.length > 0){
+                let peticiones = pilaDePeticionesBackward.pop();
+                this.peticiones = peticiones;
+                this.procesarPeticiones();
+            }
+        } else if(tipo == "next"){
+            if(this.peticiones.length > 0){
+                let pets = this.peticiones;
+                pilaDePeticionesBackward.push(pets);
+                this.limpiarPeticiones();
+            }
+            if(pilaDePeticionesForward.length > 0){
+                let peticiones = pilaDePeticionesForward.pop();
+                this.peticiones = peticiones;
+                this.procesarPeticiones();
+            }
+        } else if(tipo == "new"){
+            if(this.peticiones.length > 0){
+                let pets = this.peticiones;
+                pilaDePeticionesBackward.push(pets);
+                pilaDePeticionesForward = [];
+                this.limpiarPeticiones();
+            }
+        }
+        
+    }
     procesarPeticiones(){
         secCentral.innerHTML = "";
-        pilaDePeticiones.push(this.peticiones);
+        
         if(this.peticiones.length > 0){
             this.peticiones.forEach(peticion => {
                 // console.log(`Procesando petición: ${peticion.tipo} con ID: ${peticion.id}`);
@@ -188,14 +236,25 @@ class ListaDePeticiones{
             
             // const peticion = this.peticiones.shift();
             // console.log(`Procesando petición: ${peticion.tipo} con ID: ${peticion.id}`);
-            this.peticiones = [];
         }
     }
 }
 
 let colaDePeticiones = new ListaDePeticiones();
 
-let pilaDePeticiones = [];
+let pilaDePeticionesBackward = [];
+let pilaDePeticionesForward = [];
 
+const btnPrev = document.getElementById("btn-prev-page");
+const btnNext = document.getElementById("btn-next-page");
 
-
+btnPrev.addEventListener("click", () => {
+    if(pilaDePeticionesBackward.length > 0){
+        colaDePeticiones.nuevaPeticion("prev");
+    }
+});
+btnNext.addEventListener("click", () => {
+    if(pilaDePeticionesForward.length > 0){
+        colaDePeticiones.nuevaPeticion("next");
+    }
+}); 
