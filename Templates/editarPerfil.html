@@ -5,11 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MusicETE</title>
-    <link rel="stylesheet" href="./Statics/CSS/estilosRep.css">
-    <link rel="stylesheet" href="./Statics/CSS/estilosLandingPage.css">
+    <link rel="stylesheet" href="../Statics/CSS/estilosRep.css">
+    <link rel="stylesheet" href="../Statics/CSS/estilosLandingPage.css">
     <script src="https://youtube.com/iframe_api"></script>
-    <script src="./Dynamics/JS/clases.js"></script>
-    <script src="./Dynamics/JS/baseDeDatos.js"></script>
+    <script src="../Dynamics/JS/clases.js"></script>
+    <script src="../Dynamics/JS/baseDeDatos.js"></script>
     
 </head>
 
@@ -18,12 +18,8 @@
     <!-- NAVBAR SUPERIOR -->
     <nav id="navbarSuperior">
         <div class="logo">MusicETE</div>
-        <div id="contBuscador" class="buscador">
-            <!-- <input type="text" placeholder="Buscar canciones, artistas..."> -->
-        </div>
         <div class="perfil">
-            <p>Usuarie</p>
-            <img src="./Statics/media/img/perfilVacio.png" alt="foto perfil" id="fotoPerfil">
+            <p>Regresar</p>
         </div>
     </nav>
 
@@ -36,7 +32,32 @@
     </aside>
 
     <section class="columna centro">
-        <div id='resultados'></div>
+         <div id='resultados'>
+            <h1>Tu perfil</h1>
+            <img src="../Statics/media/img/perfilVacio.png" alt="foto perfil" id="fotoPerfil" >
+            <br><br><br>
+            <article class="texto">
+                <p id="usuario"></p>
+            </article>
+            <article class="texto">
+                <p id="contraseña"></p>
+            </article>
+            <article>
+                <p>Tus géneros favoritos:</p>
+                <div id="generos">
+                    <div class="genero"></div>
+                </div>
+            </article>
+            <article>
+                <label>
+                    <p id="sexo"></p>
+                    </select>
+                </label>
+            </article>
+            <button type="submit">Editar perfil</button>
+            <article id="inline">Si ya tienes una cuenta, <a href="../login.html">inicia sesion.</a></article>
+            <br>
+         </div>
         <div id="divSecPlayer" class="section">
         <div id='playerContainer'></div>
     </div>
@@ -60,8 +81,9 @@
         
     </footer>
 
-    <script src="./Dynamics/JS/Buscador.js"></script>
-    <script src="./Dynamics/JS/Reproductor.js"></script>
+    <script src="../Dynamics/JS/Buscador.js"></script>
+    <script src="../Dynamics/JS/Reproductor.js"></script>
+    <script src="../Dynamics/JS/editarPerfil.js"></script>
 </body> 
 
 </html>

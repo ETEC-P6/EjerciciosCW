@@ -40,6 +40,14 @@
 #navbarSuperior .perfil {
     color: #f0f0f0;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+#fotoPerfil{
+    width: 2em;
+    margin: 1em;
 }
 
 /* COLUMNAS ESTÁTICAS */
@@ -109,4 +117,8 @@
     align-items: center;
     justify-content: center;
     min-width: 50px;
+}
+
+a{
+    color:#ffcc00;
 }

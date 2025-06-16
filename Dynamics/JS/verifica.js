@@ -4,7 +4,6 @@ const password = document.getElementById('contraseña');
 const generos = document.querySelectorAll('.generos');
 const sexo = document.getElementById('sexo');
 const terminos = document.getElementById('terminos');
-const foto = document.getElementById('agregar');
 
   formulario.addEventListener('submit', function(e){
 
@@ -54,7 +53,7 @@ const foto = document.getElementById('agregar');
       const datos = {
         nombre: usuario.value.trim(),
         password: password.value.trim(),
-        foto: `../../Statics/img/${foto.value.trim()}`,
+        //foto: foto.value.trim(),
         generos: JSON.stringify(generosSeleccionados),
         sexo: sexo.value 
       }
@@ -66,8 +65,11 @@ const foto = document.getElementById('agregar');
       
       document.cookie = `${nombreCookie}=${valorCookie}; max-age=${duracionCookie}; path=/`;
       console.log(document.cookie);
+
+      console.log("asdfghjkmnjbhgfdsa");
   
       
   });
+
 
     
