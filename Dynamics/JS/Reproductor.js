@@ -6,6 +6,8 @@ const ICON_SONG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
 const ICON_ALBUM = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256-96a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0 224a128 128 0 1 0 0-256 128 128 0 1 0 0 256zm0-96a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/></svg>`;
 const ICON_GENERO = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M465 7c-9.4-9.4-24.6-9.4-33.9 0L383 55c-2.4 2.4-4.3 5.3-5.5 8.5l-15.4 41-77.5 77.6c-45.1-29.4-99.3-30.2-131 1.6c-11 11-18 24.6-21.4 39.6c-3.7 16.6-19.1 30.7-36.1 31.6c-25.6 1.3-49.3 10.7-67.3 28.6C-16 328.4-7.6 409.4 47.5 464.5s136.1 63.5 180.9 18.7c17.9-17.9 27.4-41.7 28.6-67.3c.9-17 15-32.3 31.6-36.1c15-3.4 28.6-10.5 39.6-21.4c31.8-31.8 31-85.9 1.6-131l77.6-77.6 41-15.4c3.2-1.2 6.1-3.1 8.5-5.5l48-48c9.4-9.4 9.4-24.6 0-33.9L465 7zM208 256a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>`;
 const ICON_BUSCADOR = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>`;
+const ICON_ELIMINAR = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>`;
+
 
 
 const divSecPlayer = document.getElementById("divSecPlayer");
@@ -356,7 +358,7 @@ class ListaDeReproduccion{
         arreglo[b] = c;
     }
 
-    let listaReproduccion = new ListaDeReproduccion(bdCanciones);
+    let listaReproduccion = new ListaDeReproduccion();
 
     /**
         El primer for que se tenía no estaba funcionando para nada.
@@ -387,12 +389,12 @@ class ListaDeReproduccion{
             {
                 document.getElementById("listaContainer").innerHTML += "<p> <span class = 'tituloCancion'>" + listaReproduccion.lista[i].nombre + "-" + listaReproduccion.lista[i].artista + "</span>";
                 /** Añado la verificación, en este caso vi que era con 'True', pero debemos de ver si se cambia para también cambiarlo aquí. */
-                const textoAlbum = (listaReproduccion.lista[i].album !== 'True') ? listaReproduccion.lista[i].album : 'Sin álbum';
+                const textoAlbum = listaReproduccion.lista[i].album;
                 console.log("tengo en listaReproduccion.lista[i].album " + listaReproduccion.lista[i].album);
                 
                 document.getElementById("listaContainer").innerHTML += "<p> <span> " + textoAlbum + "</span>";
-                document.getElementById("listaContainer").innerHTML += "<button onclick='reproducir(" + listaReproduccion.lista[i].id + ")'>Reproducir</button>";
-                document.getElementById("listaContainer").innerHTML += "<button onclick='eliminarDeLista(" + i + ")'>Eliminar</button>" + "</p>";
+                document.getElementById("listaContainer").innerHTML += "<span class='flexButton'> <button class='botonLista' onclick='reproducir(" + listaReproduccion.lista[i].id + ")'>" + ICON_PLAY + "</button>"
+                + "<button class='botonLista' onclick='eliminarDeLista(" + i + ")'>" + ICON_ELIMINAR + "</button> </span>" + "</p>";
             }
     }
 

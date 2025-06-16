@@ -7,6 +7,21 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.botonLista{
+    min-width: 40px;
+    max-width: 40px;
+}
+
+/*#listaContainer{
+    display: flex;
+    flex-direction: column;
+}*/
+
+.flexButton{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+}
 /* Título principal */
 h1 {
     text-align: center;
