@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="../Statics/CSS/estilosRegistro.css">
+    <!--<link rel="icon" href="../../Statics/media/logo.png" type="image/icon"> -->
+</head>
+<body>
+    <main>
+        <form id="form-registro">
+            <h1>Crear cuenta</h1>
+            <img src="../Statics/media/img/perfilVacio.png" alt="foto perfil" id="fotoPerfil" >
+            <article>
+                <input accept="image/*" type="file" name="arch" id="agregar">
+            </article>
+            <br><br><br>
+            <article class="texto">
+                <label>
+                    <input type="text" id="usuario" name="usuario" minlength="3" maxlength="15" placeholder="   Nombre de usuario   " required/><!-- Espacio en placeholder es para que se vea bien -->
+                </label>
+            </article>
+            <article class="texto">
+                <label>
+                    <input type="password" id="contraseña" name="contraseña" minlength="5" placeholder="   Contraseña   " required/>
+                </label>
+            </article>
+            <article>
+                <br>
+                <p>Por favor selecciona los géneros que te gustan:</p>
+                <label id="generos">
+                    <div class="fila">
+                        <input type="checkbox" class="generos" name="generos" value="clasica"> Clásica
+                        <input type="checkbox" class="generos" name="generos" value="rock"> Rock
+                        <input type="checkbox" class="generos" name="generos" value="cumbia"> Cumbia
+                    </div>  
+                    <br>
+                    <div class="fila">
+                        <input type="checkbox" class="generos" name="generos" value="pop"> Pop
+                        <input type="checkbox" class="generos" name="generos" value="reggaeton"> Reggaeton
+                        <input type="checkbox" class="generos" name="generos" value="hipHop"> Hip Hop
+                    </div>
+                    <br>
+                    <div class="fila">
+                        <input type="checkbox" class="generos" name="generos" value="jazz"> Jazz
+                        <input type="checkbox" class="generos" name="generos" value="indie"> Indie
+                        <input type="checkbox" class="generos" name="generos" value="salsa"> Salsa
+                    </div>
+                    <br>
+                    <div class="fila">
+                        <input type="checkbox" class="generos" name="generos" value="k-pop"> K-Pop
+                        <input type="checkbox" class="generos" name="generos" value="blues"> Blues
+                        <input type="checkbox" class="generos" name="generos" value="reggae"> Reggaeton
+                    </div>
+                    <br>
+                    <div class="fila">
+                        <input type="checkbox" class="generos" name="generos" value="country"> Country
+                        <input type="checkbox" class="generos" name="generos" value="punk"> Punk
+                        <input type="checkbox" class="generos" name="generos" value="metal"> Metal
+                    </div>
+                </label>
+            </article>
+            <article id="inline">
+                <label>
+                    <p>Por favor selecciona tu sexo:</p>
+                    <select name="sexo" id="sexo" required>
+                        <option value="">-- Selecciona una opción --</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="ND">Prefiero no decir</option>
+                    </select>
+                </label>
+            </article>
+            <article id="inline">
+                <label>
+                    <input type="radio" id="terminos" required>
+                    Acepto los <a href="terminos.html" target="_blank">términos y condiciones</a>
+                </label>
+            </article>
+            <button type="submit">Crear cuenta</button>
+            <article id="inline">Si ya tienes una cuenta, <a href="../login.html">inicia sesion.</a></article>
+        </form>
+    </main> 
+    <script src="../Dynamics/JS/fotoPerfil.js"></script> 
+    <script src="../Dynamics/JS/verifica.js"></script>
+</body>
+</html>
