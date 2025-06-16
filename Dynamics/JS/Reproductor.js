@@ -83,8 +83,8 @@ function reproducir(id)
             {
                 contenedor.innerHTML = '<div id="player"></div>';
                 player = new YT.Player('player', {
-                    height: '390',
-                    width: '640',
+                    height: '100%',
+                    width: '100%',
                     videoId: bdCanciones[i].link,
                     playerVars: { playsinline: 1 },
                     events: {
