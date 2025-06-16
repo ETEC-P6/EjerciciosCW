@@ -9,20 +9,21 @@ const ICON_BUSCADOR = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 
 
 
 const divSecPlayer = document.getElementById("divSecPlayer");
+const contenedor = document.getElementById('playerContainer');
 
 let player;
 function reproducir(id)
 {
     divSecPlayer.style.display = "block";
     
-    for (var i = 0; i < bdCanciones.length; i++)
+    for (let i = 0; i < bdCanciones.length; i++)
     {
         if (bdCanciones[i].id == id)
         {
-            let contenedor = document.getElementById('playerContainer');
+            
 
             if (player) 
-                player.loadVideoById(id);
+                player.loadVideoById(bdCanciones[i].link);
             else 
             {
                 contenedor.innerHTML = '<div id="player"></div>';
