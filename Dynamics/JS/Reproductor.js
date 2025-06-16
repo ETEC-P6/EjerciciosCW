@@ -162,6 +162,33 @@ function generarBusqueda(resultados){
                                 </div>
                             </div>`;
         nuevoP.innerHTML = nuevoInnerHTML;
+
+        // let div = document.createElement("div");
+        // div.classList.add("flexRow", "contIconInfoCancion");
+        // let div2 = document.createElement("div");
+        // div2.classList.add("icono");
+        // div2.style.display = "none";
+        // div2.innerHTML = icon;
+        // div.appendChild(div2);
+        // let divImg = document.createElement("div");
+        // divImg.innerHTML = `<img src="${(resultados[i].url_img)?resultados[i].url_img:""}" alt="" class="img-peq">`;
+        // div.appendChild(divImg);
+
+        // let divInfo = document.createElement("div");
+        // divInfo.classList.add("infoCancionItem");
+        // // divInfo.innerHTML = spanTitulo.outerHTML;
+        // divInfo.appendChild(spanTitulo);
+
+        // let divInfoCancion = document.createElement("div");
+        // divInfoCancion.classList.add("infoCancion");
+        // divInfoCancion.innerHTML = infoCancion;
+        // divInfo.appendChild(divInfoCancion);
+        // div.appendChild(divInfo);
+
+        // nuevoP.appendChild(div);
+
+
+
         let divBotonesCancion = document.createElement("div");
         divBotonesCancion.classList.add("botonesCancion");
         if(resultados[i].tipo == "cancion")
