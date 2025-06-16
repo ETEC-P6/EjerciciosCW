@@ -250,9 +250,23 @@ function busqueda()
 
 let reproduciendo = false;
 
+let duration = 0;
+let slider = document.getElementById('videoSlider');
+let updateInterval;
+
 function onPlayerReady(event) {
     // Opcional: reproducir cuando esté listo
     event.target.playVideo();
+    duration = player.getDuration();
+    slider.max = duration;
+
+    // Actualiza el slider cada segundo
+    updateInterval = setInterval(() => {
+        if (player && player.getPlayerState() === YT.PlayerState.PLAYING) {
+            slider.value = Math.floor(player.getCurrentTime());
+        }
+    }, 1000);
+  
 }
 
 function onPlayerStateChange(event) {
@@ -264,7 +278,14 @@ function onPlayerStateChange(event) {
         reproduciendo = false;
         btnPausa.innerHTML = ICON_PLAY;
     }
+    if (event.data === YT.PlayerState.ENDED) {
+        clearInterval(updateInterval);
+    }
 }
+
+slider.addEventListener('input', () => {
+    player.seekTo(slider.value, true);
+});
 
 function cancionAnterior(i)
 {
