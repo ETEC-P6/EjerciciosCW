@@ -324,13 +324,21 @@ let pilaDePeticionesForward = [];
 const btnPrev = document.getElementById("btn-prev-page");
 const btnNext = document.getElementById("btn-next-page");
 
-btnPrev.addEventListener("click", () => {
-    if(pilaDePeticionesBackward.length > 0){
-        colaDePeticiones.nuevaPeticion("prev");
-    }
+const btnPrevCel = document.getElementById("btn-prev-page-cel");
+const btnNextCel = document.getElementById("btn-next-page-cel");
+
+const btnsNavegacion = [[btnPrev, btnPrevCel], [btnNext, btnNextCel]];
+btnsNavegacion[0].forEach(btn => {
+    btn.addEventListener("click", () => {
+        if(pilaDePeticionesBackward.length > 0){
+            colaDePeticiones.nuevaPeticion("prev");
+        }
+    });
 });
-btnNext.addEventListener("click", () => {
-    if(pilaDePeticionesForward.length > 0){
-        colaDePeticiones.nuevaPeticion("next");
-    }
-}); 
+btnsNavegacion[1].forEach(btn => {
+    btn.addEventListener("click", () => {
+        if(pilaDePeticionesForward.length > 0){
+            colaDePeticiones.nuevaPeticion("next");
+        }
+    });
+});

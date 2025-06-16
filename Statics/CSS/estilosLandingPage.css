@@ -153,6 +153,9 @@ a.no-etiqueta-a {
     width: 50vw;
     justify-content: center;
 }
+section.botonesReproductor{
+    margin-bottom: 12px;
+}
 .botonesReproductor>div{
     display: flex;
 }
@@ -160,3 +163,94 @@ a.no-etiqueta-a {
     flex: auto;
 }
 
+
+/* PARA CELULAR */
+.btn-footer-cel{
+    fill: white;
+}
+
+#navbar-foot-cel{
+    display: none;
+}
+#div-btns-nav{
+    display: none;
+}
+#div-btns-nav{
+    gap: 10vw;
+    padding-right: 8vw;
+}
+#navbar-reproductor-nombre{
+    left: 15px !important;
+}
+@media (max-width: 600px) {
+    #navbarReproductor>div{
+        width: 100%;
+    }
+    section.botonesReproductor{
+        width: 80%;
+    }
+    .izquierda{
+        display: none;
+    }
+    .centro {
+        left: 0;
+        right: 0;
+        margin-top: 60px;
+        position: inherit;
+        
+    }
+    .derecha{
+        position: inherit;
+        width: auto;
+    }
+    .section{
+        max-width: 800px;
+        background-color: #262626;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+
+    }
+    #navbarSuperior{
+        position: fixed;
+    }
+    #divSecPlayer{
+        display: block;
+    }
+    #navbar-sup-btn-perfil{
+        display: none;
+    }
+    #div-btns-nav{
+        display: flex;
+    }
+    #navbarSuperior{
+        justify-content: space-evenly;
+    }
+    #navbarReproductor{
+        display: flex;
+        flex-direction: column;
+        height: fit-content;        
+    }
+    #navbar-foot-cel{
+        display: flex;
+    }
+    #div-cont-principal{
+        display: flex;
+        flex-direction: column-reverse;
+        margin-bottom: 200px;
+    }
+    #navbar-controles{
+        display: flex;
+        flex-direction: column;
+    }
+    #navbar-reproductor-nombre{
+        /* display: block; */
+        left: 0;
+        position: inherit !important; 
+    }
+    #listaContainer{
+        margin: 0;
+    }
+
+    
+}

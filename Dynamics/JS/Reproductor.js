@@ -13,7 +13,58 @@ const ICON_ELIMINAR = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 
 const divSecPlayer = document.getElementById("divSecPlayer");
 const contenedor = document.getElementById('playerContainer');
 
+const navReprodNombre = document.getElementById("navbar-reproductor-nombre");
+
 let player;
+
+function cargarDatosCancionReproductor(i) {
+    navReprodNombre.innerHTML = "";
+    let divCancion = document.createElement("div");
+    // divCancion.classList.add("lista");
+    let div01 = document.createElement("div");
+    
+    let span1 = document.createElement("span");
+    span1.classList.add("tituloCancion");
+    span1.innerHTML = `${bdCanciones[i].nombre} - `;
+
+    let spanArt = document.createElement("span");
+    spanArt.classList.add("artista-cancion");
+    spanArt.innerText = bdCanciones[i].artista;
+    spanArt.addEventListener("click", (e) => {
+        e.stopPropagation();
+        let id = (()=>{
+            // let idArtista = bdAlbums.find(album => album.nombre === cancion.album).id_artista;
+            let idArtista = bdCanciones[i].id_artista;
+            // console.log(idArtista);
+            return idArtista;
+        })();
+        contenido("artista", id);
+    });
+    span1.appendChild(spanArt);
+
+    div01.appendChild(span1);
+
+    let div02 = document.createElement("div");
+    // div02.classList.add("infoCancion");
+
+    let span = document.createElement("span");
+    span.classList.add("albumCancion");
+    span.innerText = bdCanciones[i].album;
+    span.addEventListener("click", (e) => {
+        e.stopPropagation();
+        let id = (()=>{
+            let idAlbum = bdCanciones[i].id_album;                        
+            return idAlbum;
+        })();
+        contenido("album", id);
+    });
+    
+    
+    divCancion.appendChild(div01);
+    div02.appendChild(span);
+    divCancion.appendChild(div02);
+    navReprodNombre.appendChild(divCancion);
+}
 function reproducir(id)
 {
     divSecPlayer.style.display = "block";
@@ -24,8 +75,10 @@ function reproducir(id)
         {
             
 
-            if (player) 
+            if (player) {
                 player.loadVideoById(bdCanciones[i].link);
+                
+            }
             else 
             {
                 contenedor.innerHTML = '<div id="player"></div>';
@@ -40,7 +93,8 @@ function reproducir(id)
                     }
                     
                 });
-        }
+            }
+            cargarDatosCancionReproductor(i);
         }
     }    
 }
