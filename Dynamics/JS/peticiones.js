@@ -76,10 +76,136 @@ class PeticionEnDOM{
         cont.classList.add("cont-pet-contenido");
 
         if(this.peticion.tipo === "artista"){
-            let listaDeAlbumes = bdAlbums;
-            listaDeAlbumes.forEach(album => {
-                console.log(album);
-                if(album.id_artista == this.peticion.id){
+            if(this.peticion.id){
+                let listaDeAlbumes = bdAlbums;
+                listaDeAlbumes.forEach(album => {
+                    console.log(album);
+                    if(album.id_artista == this.peticion.id){
+                        let divAlbum = document.createElement("div");
+                        divAlbum.classList.add("tarjeta");
+                        let div01 = document.createElement("div");
+                        div01.classList.add("content-tarj-img");
+                        let img = document.createElement("img");
+                        img.src = album.url_img;
+                        div01.appendChild(img);
+                        divAlbum.appendChild(div01);
+
+                        let div02 = document.createElement("div");
+                        div02.classList.add("content-tarj-info");
+                        let span = document.createElement("span");
+                        span.innerText = album.nombre;
+                        div02.appendChild(span);
+                        divAlbum.appendChild(div02);
+
+                        divAlbum.setAttribute("event-detonator", "click");
+                        divAlbum.setAttribute("data-id", `${album.id}`);
+                        divAlbum.setAttribute("data-res-busc-item", `${"album"}`);
+
+                        divAlbum.addEventListener("click", (e) => {
+                            let id = e.currentTarget.getAttribute("data-id");
+                            let tipo = e.currentTarget.getAttribute("data-res-busc-item");
+                            contenido(tipo, id);
+                        });
+                        cont.appendChild(divAlbum);
+                    }
+                });
+            } else {
+                let listaDeArtistas = bdArtistas;
+                listaDeArtistas.forEach(artista => {
+                    let divArtista = document.createElement("div");
+                    divArtista.classList.add("tarjeta");
+                    let div01 = document.createElement("div");
+                    div01.classList.add("content-tarj-img");
+                    let img = document.createElement("img");
+                    img.src = artista.url_img;
+                    div01.appendChild(img);
+                    divArtista.appendChild(div01);
+
+                    let div02 = document.createElement("div");
+                    div02.classList.add("content-tarj-info");
+                    let span = document.createElement("span");
+                    span.innerText = artista.nombre;
+                    div02.appendChild(span);
+                    divArtista.appendChild(div02);
+
+                    divArtista.setAttribute("event-detonator", "click");
+                    divArtista.setAttribute("data-id", `${artista.id}`);
+                    divArtista.setAttribute("data-res-busc-item", `${"artista"}`);
+
+                    divArtista.addEventListener("click", (e) => {
+                        let id = e.currentTarget.getAttribute("data-id");
+                        let tipo = e.currentTarget.getAttribute("data-res-busc-item");
+                        contenido(tipo, id);
+                        
+                    });
+                    
+                    cont.appendChild(divArtista);
+                });
+
+            }
+        } else if(this.peticion.tipo === "album"){
+            if(this.peticion.id){
+                let listaDeCanciones = bdCanciones;
+                listaDeCanciones.forEach(cancion => {
+                    console.log(cancion);
+                    if(cancion.id_album == this.peticion.id){
+                        let divCancion = document.createElement("div");
+                        divCancion.classList.add("lista");
+                        let div01 = document.createElement("div");
+                        
+                        let span1 = document.createElement("span");
+                        span1.classList.add("tituloCancion");
+                        span1.innerText = cancion.nombre;
+                        div01.appendChild(span1);
+
+                        let div02 = document.createElement("div");
+                        div02.classList.add("infoCancion");
+                        let span = document.createElement("span");
+                        span.classList.add("albumCancion");
+                        span.innerText = cancion.album;
+                        span.addEventListener("click", (e) => {
+                            e.stopPropagation();
+                            let id = (()=>{
+                                // let idArtista = bdAlbums.find(album => album.nombre === cancion.album).id_artista;
+                                let idArtista = bdAlbums[this.peticion.id-1].id_artista;
+                                console.log(idArtista);
+                                return idArtista;
+                            })();
+                            contenido("artista", id);
+                        });
+
+                        let span2 = document.createElement("span");
+                        span2.innerText = cancion.genero;
+                        div02.appendChild(span);
+                        div02.appendChild(span2);
+                        div01.appendChild(div02);
+                        divCancion.appendChild(div01);
+
+                        let div03 = document.createElement("div");
+                        div03.classList.add("botonesCancion");
+                        div03.innerHTML = `<div class="cursor icono-peq agregar-cancion" title="Agregar a lista de reproducción">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zM200 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"></path></svg>
+                                            </div>`;
+                        divCancion.appendChild(div03);
+
+                        divCancion.setAttribute("event-detonator", "click");
+                        divCancion.setAttribute("data-id", `${cancion.id}`);
+                        divCancion.setAttribute("data-res-busc-item", `${"cancion"}`);
+
+                        divCancion.addEventListener("click", (e) => {
+                            let id = e.currentTarget.getAttribute("data-id");
+                            let tipo = e.currentTarget.getAttribute("data-res-busc-item");
+                            contenido(tipo, id);
+                            
+                        });
+
+                        cont.appendChild(divCancion);
+                    }
+                });
+            } else {
+                let listaDeAlbumes = bdAlbums;
+                listaDeAlbumes.forEach(album => {
+                    console.log(album);
                     let divAlbum = document.createElement("div");
                     divAlbum.classList.add("tarjeta");
                     let div01 = document.createElement("div");
@@ -106,66 +232,10 @@ class PeticionEnDOM{
                         contenido(tipo, id);
                     });
                     cont.appendChild(divAlbum);
-                }
-            });
-        } else if(this.peticion.tipo === "album"){
-            let listaDeCanciones = bdCanciones;
-            listaDeCanciones.forEach(cancion => {
-                console.log(cancion);
-                if(cancion.id_album == this.peticion.id){
-                    let divCancion = document.createElement("div");
-                    divCancion.classList.add("lista");
-                    let div01 = document.createElement("div");
                     
-                    let span1 = document.createElement("span");
-                    span1.classList.add("tituloCancion");
-                    span1.innerText = cancion.nombre;
-                    div01.appendChild(span1);
-
-                    let div02 = document.createElement("div");
-                    div02.classList.add("infoCancion");
-                    let span = document.createElement("span");
-                    span.classList.add("albumCancion");
-                    span.innerText = cancion.album;
-                    span.addEventListener("click", (e) => {
-                        e.stopPropagation();
-                        let id = (()=>{
-                            // let idArtista = bdAlbums.find(album => album.nombre === cancion.album).id_artista;
-                            let idArtista = bdAlbums[this.peticion.id-1].id_artista;
-                            console.log(idArtista);
-                            return idArtista;
-                        })();
-                        contenido("artista", id);
-                    });
-
-                    let span2 = document.createElement("span");
-                    span2.innerText = cancion.genero;
-                    div02.appendChild(span);
-                    div02.appendChild(span2);
-                    div01.appendChild(div02);
-                    divCancion.appendChild(div01);
-
-                    let div03 = document.createElement("div");
-                    div03.classList.add("botonesCancion");
-                    div03.innerHTML = `<div class="cursor icono-peq agregar-cancion" title="Agregar a lista de reproducción">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zM200 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"></path></svg>
-                                        </div>`;
-                    divCancion.appendChild(div03);
-
-                    divCancion.setAttribute("event-detonator", "click");
-                    divCancion.setAttribute("data-id", `${cancion.id}`);
-                    divCancion.setAttribute("data-res-busc-item", `${"cancion"}`);
-
-                    divCancion.addEventListener("click", (e) => {
-                        let id = e.currentTarget.getAttribute("data-id");
-                        let tipo = e.currentTarget.getAttribute("data-res-busc-item");
-                        contenido(tipo, id);
-                        
-                    });
-
-                    cont.appendChild(divCancion);
-                }
-            });
+                });
+            }
+            
         }
         this.contenedor.appendChild(cont);  
     }
