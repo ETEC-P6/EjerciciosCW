@@ -66,7 +66,7 @@ const terminos = document.getElementById('terminos');
       document.cookie = `${nombreCookie}=${valorCookie}; max-age=${duracionCookie}; path=/`;
       console.log(document.cookie);
 
-      console.log("asdfghjkmnjbhgfdsa");
+      // window.location.href = "../../login.html";
   
       
   });

@@ -1,3 +1,4 @@
+window.location.reload();
 const contBuscador = document.getElementById("contBuscador");
 const divResultados = document.getElementById("resultados");
 

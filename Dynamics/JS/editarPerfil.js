@@ -1,10 +1,12 @@
 let nombresCookies = document.cookie.split("; ").map(cookie => cookie.split("=")[0]);
 const cookies = document.cookie.split("; ");
+console.log(cookies)
+
 const fotoPerfil = document.getElementById('fotPerfil');
-let usuario = document.getElementById('usuario');
-let password = document.getElementById('contraseña');
-let generos = document.getElementById('generos');
-let sexo = document.getElementById('sexo');
+const usuario = document.getElementById('usuario');
+const password = document.getElementById('contraseña');
+const generos = document.getElementById('generos');
+const sexo = document.getElementById('sexo');
 const editar = document.getElementById('editar');
 const cerrar = document.getElementById('cerrar');
 const res = document.getElementById('resultados');
@@ -23,7 +25,7 @@ for (let cookie of cookies) {
 console.log(nombreUsuario)
 
 let datos = null;
-  for (let cookie of cookies) {
+ for (let cookie of cookies) {
     const [key, value] = cookie.split("=");
     if (key === nombreUsuario) {
       datos = decodeURIComponent(value);
@@ -53,27 +55,35 @@ editar.addEventListener('click', function(e){
 
     const actualizar = document.getElementById('actualizar').addEventListener('click', function(e){
 
+        const usuarioN = document.getElementById('usuarioN');
+        const passwordN = document.getElementById('contraseñaN');
+        const generosN = document.querySelectorAll('.generosN');
+        const sexoN = document.getElementById('sexoN');
+
+        console.log(usuarioN);
+
         const nombresCookies = document.cookie.split("; ").map(cookie => cookie.split("=")[0]);
 
-        if(nombresCookies.includes(usuario.value.trim())){
+        if(nombresCookies.includes(usuarioN.value.trim())){
             e.preventDefault();
             alert("El nombre de usuario ya existe, por favor intenta con otro.")
         }
             
 
-        if(usuario.value.trim() === ''){
+        if(usuarioN.value.trim() === ''){
             e.preventDefault();
             alert('Por favor coloca un nombre de usuario.')
         } 
 
-        if(password.value.trim() === ''){
+        if(passwordN.value.trim() === ''){
             e.preventDefault();
             alert('Por favor coloca una contraseña.')
         } 
 
+        console.log(generosN)
         
         let alMenosUna = 0;
-        generos.forEach(cb => {
+        generosN.forEach(cb => {
             alMenosUna += cb.checked ? 1 : 0;
         })
     
@@ -82,36 +92,31 @@ editar.addEventListener('click', function(e){
             alert('Por favor selecciona al menos un género musical.')
         } 
 
-        if(sexo.value === ''){
+        if(sexoN.value === ''){
             e.preventDefault();
             alert('Por favor selecciona tu sexo.')
         } 
 
 
-        const generosSeleccionados = Array.from(generos).filter(cb => cb.checked).map(cb => cb.value);
+        const generosSeleccionados = Array.from(generosN).filter(cb => cb.checked).map(cb => cb.value);
         console.log(JSON.stringify(generosSeleccionados));
 
-        const datos = {
-            nombre: usuario.value.trim(),
-            password: password.value.trim(),
-            //foto: foto.value.trim(),
+        const datosN = {
+            nombre: usuarioN.value.trim(),
+            password: passwordN.value.trim(),
             generos: JSON.stringify(generosSeleccionados),
-            sexo: sexo.value 
+            sexo: sexoN.value 
         }
 
-
-
         
-        document.cookie = `USUARIO=${nombreUsuario}; max-age=-1; path=/;`; 
-        document.cookie = nombreUsuario; "max-age=-1; path =/";
+        document.cookie = `${nombreUsuario}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 
         let duracionCookie = 60 * 60 * 24 * 7; 
-        let nuevoNombre = usuario.value.trim();
-        let valorCookie = encodeURIComponent(JSON.stringify(datos));
+        let nuevoNombre = usuarioN.value.trim();
+        let valorCookie = encodeURIComponent(JSON.stringify(datosN));
         document.cookie = `${nuevoNombre}=${valorCookie}; max-age=${duracionCookie}; path=/`;
-        document.cookie = `USUARIO=${nuevoNombre}; max-age=${duracionCookie}; path=/`;
-
-        window.location.href = "./editarPerfil.html"
+        document.cookie = `USUARIO=${nuevoNombre}; max-age=${duracionCookie};`
+        window.location.reload()
 
     });
 
