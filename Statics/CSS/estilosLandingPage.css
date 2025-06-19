@@ -122,3 +122,9 @@
 a{
     color:#ffcc00;
 }
+
+span{
+    color:rgb(255, 0, 0);
+    font-weight: bold;
+    text-align: center;
+}

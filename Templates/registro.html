@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="stylesheet" href="../Statics/CSS/estilosRegistro.css">
-    <!--<link rel="icon" href="../../Statics/media/logo.png" type="image/icon"> -->
 </head>
 <body>
     <main>
@@ -15,13 +14,15 @@
             <br><br><br>
             <article class="texto">
                 <label>
-                    <input type="text" id="usuario" name="usuario" minlength="3" maxlength="15" placeholder="   Nombre de usuario   " required/><!-- Espacio en placeholder es para que se vea bien -->
+                    <input type="text" id="usuario" name="usuario" minlength="3" maxlength="15" placeholder="Nombre de usuario" required/><!-- Espacio en placeholder es para que se vea bien -->
                 </label>
+                <span class="span-dentro" id="errorUsuario"></span>
             </article>
             <article class="texto">
                 <label>
-                    <input type="password" id="contraseña" name="contraseña" minlength="5" placeholder="   Contraseña   " required/>
+                    <input type="password" id="contraseña" name="contraseña" minlength="5" placeholder="Contraseña" required/>
                 </label>
+                <span class="span-dentro" id="errorContraseña"></span>
             </article>
             <article>
                 <br>
@@ -57,6 +58,7 @@
                         <input type="checkbox" class="generos" name="generos" value="metal"> Metal
                     </div>
                 </label>
+                <span class="span-fuera" id="errorGeneros"></span>
             </article>
             <article id="inline">
                 <label>
@@ -68,12 +70,14 @@
                         <option value="ND">Prefiero no decir</option>
                     </select>
                 </label>
+                <span class="span-fuera" id="errorSexo"></span>
             </article>
             <article id="inline">
                 <label>
                     <input type="radio" id="terminos" required>
                     Acepto los <a href="terminos.html" target="_blank">términos y condiciones</a>
                 </label>
+                <span class="span-fuera" id="errorTerminos"></span>
             </article>
             <button type="submit">Crear cuenta</button>
             <article id="inline">Si ya tienes una cuenta, <a href="../login.html">inicia sesion.</a></article>

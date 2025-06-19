@@ -20,13 +20,15 @@
             <h1>Inicio de Sesión</h1>
             <article class="input">
                 <label>
-                    <input type="text" id="usuario" minlength="3" maxlength="15" placeholder="Nombre de usuario"/>
+                    <input type="text" id="usuario" minlength="3" maxlength="15" placeholder="Nombre de usuario" required/>
                 </label>
+                <span class="span-dentro" id="errorUsuario"></span>
             </article>
             <article class="input">
                 <label>
                     <input type="password" id="contraseña" minlength="5"  placeholder="Contraseña" required/>
                 </label>
+                <span class="span-dentro" id="errorContraseña"></span>
             </article>
             <button type="submit">Iniciar sesion</button>
             <article class="text" id="cambio">Si no tienes una cuenta, <a href="./Templates/registro.html">crea una.</a></article>
